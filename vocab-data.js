@@ -381,7 +381,7 @@ const THEMES = [
             // { fr: 'le pingouin', de: 'der Pinguin', hint: 'Masculin - Vit sur la glace' },
             // { fr: 'le dauphin', de: 'der Delphin', hint: 'Masculin - Mammifère marin très intelligent' },
             // { fr: 'la baleine', de: 'der Wal', hint: 'Masculin - Proche de "whale"' },
-            { fr: 'le requin', de: 'der Hai', hint: 'Masculin - Grand prédateur des océans' /}
+            { fr: 'le requin', de: 'der Hai', hint: 'Masculin - Grand prédateur des océans'}
         ]
     },
 
@@ -392,7 +392,7 @@ const THEMES = [
         words: [
             { fr: 'le mot', de: 'das Wort', hint: 'nom neutre' },
         ]
-    },
+    }
 
     // ─────────────────────────────────────────
     //  ➕ AJOUTE UN NOUVEAU THÈME ICI
