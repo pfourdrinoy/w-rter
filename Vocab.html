@@ -18,6 +18,7 @@
     --green: #5cb87a;
     --red: #d96b5a;
     --blue: #6ab0d4;
+    --orange: #e8954a;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,7 +31,6 @@
     overflow-x: hidden;
   }
 
-  /* Grain overlay */
   body::before {
     content: '';
     position: fixed;
@@ -56,87 +56,31 @@
     border-bottom: 1px solid var(--border);
   }
 
-  .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--gold);
-    letter-spacing: -1px;
-  }
-
+  .logo { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--gold); letter-spacing: -1px; }
   .logo span { color: var(--cream); }
-
-  .tagline {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-  }
+  .tagline { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; }
 
   /* ── HOME ── */
-  #home-screen {
-    padding: 60px 40px 40px;
-    max-width: 860px;
-    margin: 0 auto;
-    width: 100%;
-  }
+  #home-screen { padding: 60px 40px 40px; max-width: 860px; margin: 0 auto; width: 100%; }
 
-  .home-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    font-weight: 900;
-    line-height: 1.05;
-    color: var(--cream);
-    margin-bottom: 12px;
-  }
-
+  .home-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; line-height: 1.05; color: var(--cream); margin-bottom: 12px; }
   .home-title .accent { color: var(--gold); }
+  .home-subtitle { font-size: 1rem; color: var(--muted); margin-bottom: 56px; font-weight: 300; }
 
-  .home-subtitle {
-    font-size: 1rem;
-    color: var(--muted);
-    margin-bottom: 56px;
-    font-weight: 300;
-  }
+  .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 20px; }
 
-  .section-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .themes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 14px;
-    margin-bottom: 48px;
-  }
+  .themes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-bottom: 48px; }
 
   .theme-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 24px 20px 20px;
-    cursor: pointer;
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    padding: 24px 20px 20px; cursor: pointer;
     transition: border-color 0.2s, transform 0.15s, background 0.2s;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
-
   .theme-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.25s;
   }
-
   .theme-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); background: #252320; }
   .theme-card:hover::before { transform: scaleX(1); }
 
@@ -144,25 +88,14 @@
   .theme-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); margin-bottom: 4px; }
   .theme-count { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--muted); }
 
-  .mode-row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-  }
+  .mode-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
 
   .mode-btn {
     display: flex; align-items: center; gap: 10px;
-    padding: 14px 20px;
-    border: 1px solid var(--border);
-    background: var(--card);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s;
-    flex: 1; min-width: 180px;
-    font-family: 'IBM Plex Sans', sans-serif;
+    padding: 14px 20px; border: 1px solid var(--border); background: var(--card);
+    border-radius: 6px; cursor: pointer; transition: all 0.2s;
+    flex: 1; min-width: 180px; font-family: 'IBM Plex Sans', sans-serif;
   }
-
   .mode-btn:hover { border-color: var(--gold); }
   .mode-btn.selected { border-color: var(--gold); background: #2a2720; }
   .mode-btn.selected .mode-icon { color: var(--gold); }
@@ -173,267 +106,192 @@
   .mode-desc { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
 
   .start-btn {
-    margin-top: 32px;
-    padding: 16px 40px;
-    background: var(--gold);
-    color: var(--bg);
-    border: none;
-    border-radius: 4px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.15s;
+    margin-top: 32px; padding: 16px 40px; background: var(--gold); color: var(--bg);
+    border: none; border-radius: 4px; font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; transition: opacity 0.2s, transform 0.15s;
   }
-
   .start-btn:hover { opacity: 0.88; transform: translateY(-1px); }
   .start-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
 
-  /* ── FLASHCARDS ── */
-  #flash-screen { align-items: center; padding: 30px 20px; }
-
+  /* ── SESSION HEADER (shared) ── */
   .session-header {
     width: 100%; max-width: 600px;
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 36px;
   }
-
   .back-btn {
-    background: none; border: 1px solid var(--border);
-    color: var(--muted); padding: 8px 16px;
-    border-radius: 4px; cursor: pointer;
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    padding: 8px 16px; border-radius: 4px; cursor: pointer;
     font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
     letter-spacing: 0.08em; transition: all 0.2s;
   }
-
   .back-btn:hover { border-color: var(--gold-dim); color: var(--cream); }
-
-  .progress-text {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem; color: var(--muted);
-  }
-
+  .progress-text { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--muted); }
   .progress-text span { color: var(--gold); }
+  .progress-bar-wrap { width: 100%; max-width: 600px; height: 2px; background: var(--border); border-radius: 2px; margin-bottom: 40px; }
+  .progress-bar { height: 100%; background: var(--gold); border-radius: 2px; transition: width 0.4s ease; }
 
-  .progress-bar-wrap {
-    width: 100%; max-width: 600px;
-    height: 2px; background: var(--border);
-    border-radius: 2px; margin-bottom: 40px;
-  }
+  /* ── FLASHCARDS ── */
+  #flash-screen { align-items: center; padding: 30px 20px; }
 
-  .progress-bar {
-    height: 100%; background: var(--gold);
-    border-radius: 2px; transition: width 0.4s ease;
-  }
-
-  /* Flashcard */
-  .flashcard-wrap {
-    width: 100%; max-width: 480px;
-    perspective: 1200px;
-    margin-bottom: 40px;
-  }
-
+  .flashcard-wrap { width: 100%; max-width: 480px; perspective: 1200px; margin-bottom: 40px; }
   .flashcard {
-    width: 100%; height: 240px;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+    width: 100%; height: 240px; position: relative;
+    transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;
   }
-
   .flashcard.flipped { transform: rotateY(180deg); }
 
   .card-face {
-    position: absolute; inset: 0;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--card);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 30px;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    position: absolute; inset: 0; border: 1px solid var(--border); border-radius: 12px;
+    background: var(--card); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; padding: 30px;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
   }
-
   .card-face.back { transform: rotateY(180deg); background: #222018; border-color: var(--gold-dim); }
-
-  .card-lang {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem; letter-spacing: 0.18em;
-    color: var(--muted); text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-
-  .card-word {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
-    font-weight: 700;
-    color: var(--cream);
-    text-align: center;
-    line-height: 1.2;
-  }
-
+  .card-lang { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 16px; }
+  .card-word { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 700; color: var(--cream); text-align: center; line-height: 1.2; }
   .card-face.back .card-word { color: var(--gold); }
+  .card-hint { margin-top: 14px; font-size: 0.8rem; color: var(--muted); font-style: italic; text-align: center; }
 
-  .card-hint {
-    margin-top: 14px;
-    font-size: 0.8rem; color: var(--muted);
-    font-style: italic; text-align: center;
-  }
-
-  .flip-hint {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem; color: var(--muted);
-    letter-spacing: 0.1em;
-    margin-bottom: 24px;
-    animation: pulse 2s infinite;
-  }
-
+  .flip-hint { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 24px; animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
 
   .flash-nav { display: flex; gap: 12px; }
-
-  .nav-btn {
-    padding: 12px 28px;
-    border-radius: 4px; border: 1px solid var(--border);
-    background: var(--card); color: var(--cream);
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
-    letter-spacing: 0.08em; cursor: pointer; transition: all 0.2s;
-  }
-
+  .nav-btn { padding: 12px 28px; border-radius: 4px; border: 1px solid var(--border); background: var(--card); color: var(--cream); font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.2s; }
   .nav-btn:hover { border-color: var(--gold-dim); }
   .nav-btn.primary { background: var(--gold); color: var(--bg); border-color: var(--gold); }
   .nav-btn.primary:hover { opacity: 0.85; }
 
-  /* ── QUIZ ── */
+  /* ── QUIZ QCM ── */
   #quiz-screen { align-items: center; padding: 30px 20px; }
-
   .quiz-area { width: 100%; max-width: 580px; }
 
-  .question-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 40px;
-    margin-bottom: 24px;
-    text-align: center;
-  }
-
-  .question-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem; letter-spacing: 0.18em;
-    color: var(--muted); text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .question-word {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    color: var(--cream); font-weight: 700;
-  }
-
+  .question-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 40px; margin-bottom: 24px; text-align: center; }
+  .question-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 20px; }
+  .question-word { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); color: var(--cream); font-weight: 700; }
   .question-hint { margin-top: 8px; font-size: 0.82rem; color: var(--muted); font-style: italic; }
 
-  .options-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
+  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .option-btn {
-    padding: 18px 16px;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 8px; color: var(--cream);
-    font-family: 'IBM Plex Sans', sans-serif; font-size: 0.95rem;
-    cursor: pointer; transition: all 0.18s; text-align: center;
-    line-height: 1.3;
+    padding: 18px 16px; background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--cream); font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem; cursor: pointer; transition: all 0.18s; text-align: center; line-height: 1.3;
   }
-
   .option-btn:hover:not(:disabled) { border-color: var(--gold-dim); background: #252320; }
   .option-btn.correct { border-color: var(--green); background: #1a2b1f; color: var(--green); }
   .option-btn.wrong { border-color: var(--red); background: #2b1a18; color: var(--red); }
   .option-btn:disabled { cursor: default; }
 
+  /* ── QUIZ SAISIE LIBRE ── */
+  #write-screen { align-items: center; padding: 30px 20px; }
+  .write-area { width: 100%; max-width: 580px; }
+
+  .write-input-wrap {
+    display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;
+  }
+
+  .write-label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.18em; color: var(--gold-dim); text-transform: uppercase;
+  }
+
+  .write-input {
+    width: 100%;
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--cream);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    caret-color: var(--gold);
+  }
+  .write-input:focus { border-color: var(--gold-dim); box-shadow: 0 0 0 2px rgba(232,200,74,0.08); }
+  .write-input.correct-input { border-color: var(--green); background: #1a2b1f; color: var(--green); }
+  .write-input.wrong-input   { border-color: var(--red);   background: #2b1a18; color: var(--red);   }
+  .write-input::placeholder { color: var(--muted); font-size: 1rem; font-family: 'IBM Plex Mono', monospace; }
+
+  .write-hint-row {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;
+  }
+  .det-hint {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--card);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .det-hint:hover { border-color: var(--gold-dim); color: var(--cream); }
+
+  .write-submit-btn {
+    width: 100%; padding: 16px;
+    background: var(--gold); color: var(--bg);
+    border: none; border-radius: 6px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem;
+    font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .write-submit-btn:hover { opacity: 0.85; }
+  .write-submit-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* ── FEEDBACK ROW (shared) ── */
   .feedback-row {
     display: flex; align-items: center; justify-content: space-between;
     margin-top: 24px; padding: 16px 20px;
     border-radius: 8px; border: 1px solid var(--border);
-    background: var(--surface);
-    min-height: 60px;
+    background: var(--surface); min-height: 60px;
   }
-
   .feedback-text { font-size: 0.9rem; color: var(--muted); }
   .feedback-text.correct { color: var(--green); }
-  .feedback-text.wrong { color: var(--red); }
+  .feedback-text.wrong   { color: var(--red);   }
 
   .next-btn {
-    padding: 10px 24px;
-    background: var(--gold); color: var(--bg);
-    border: none; border-radius: 4px;
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
-    letter-spacing: 0.08em; cursor: pointer;
+    padding: 10px 24px; background: var(--gold); color: var(--bg);
+    border: none; border-radius: 4px; font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.08em; cursor: pointer;
     transition: opacity 0.2s; text-transform: uppercase;
   }
-
   .next-btn:hover { opacity: 0.85; }
 
   /* ── RESULTS ── */
   #results-screen { align-items: center; justify-content: center; padding: 40px 20px; }
-
-  .results-card {
-    max-width: 500px; width: 100%;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 56px 48px; text-align: center;
-  }
-
+  .results-card { max-width: 500px; width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 56px 48px; text-align: center; }
   .result-emoji { font-size: 4rem; margin-bottom: 24px; display: block; }
-
-  .result-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem; color: var(--gold); margin-bottom: 8px;
-  }
-
+  .result-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); margin-bottom: 8px; }
   .result-subtitle { font-size: 0.9rem; color: var(--muted); margin-bottom: 40px; }
-
-  .score-display {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 4rem; color: var(--cream);
-    font-weight: 500; margin-bottom: 8px;
-  }
-
+  .score-display { font-family: 'IBM Plex Mono', monospace; font-size: 4rem; color: var(--cream); font-weight: 500; margin-bottom: 8px; }
   .score-display span { color: var(--gold-dim); font-size: 2rem; }
   .score-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 40px; }
-
-  .stat-row {
-    display: flex; gap: 24px; justify-content: center;
-    margin-bottom: 40px;
-  }
-
+  .stat-row { display: flex; gap: 24px; justify-content: center; margin-bottom: 40px; }
   .stat-box { text-align: center; }
-  .stat-val {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.4rem; color: var(--cream);
-  }
-
+  .stat-val { font-family: 'IBM Plex Mono', monospace; font-size: 1.4rem; color: var(--cream); }
   .stat-val.good { color: var(--green); }
-  .stat-val.bad { color: var(--red); }
+  .stat-val.bad  { color: var(--red);   }
   .stat-lbl { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
-
   .result-actions { display: flex; flex-direction: column; gap: 10px; }
-
-  .action-btn {
-    padding: 14px 24px; border-radius: 4px; cursor: pointer;
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem;
-    letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s;
-    border: 1px solid var(--border);
-  }
-
-  .action-btn.primary { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+  .action-btn { padding: 14px 24px; border-radius: 4px; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; border: 1px solid var(--border); }
+  .action-btn.primary   { background: var(--gold); color: var(--bg); border-color: var(--gold); }
   .action-btn.primary:hover { opacity: 0.85; }
   .action-btn.secondary { background: transparent; color: var(--cream); }
   .action-btn.secondary:hover { border-color: var(--gold-dim); }
+
+  /* Mode badge on results */
+  .mode-badge {
+    display: inline-block;
+    padding: 4px 10px; border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--muted); margin-bottom: 28px;
+  }
 
   /* ── UTILS ── */
   @media (max-width: 520px) {
@@ -452,7 +310,9 @@
   <div class="tagline">// Quiz vocabulaire allemand</div>
 </header>
 
-<!-- ══ HOME ══ -->
+<!-- ══════════════════════════════════════ -->
+<!--  HOME                                 -->
+<!-- ══════════════════════════════════════ -->
 <div id="home-screen" class="screen active">
   <h1 class="home-title">Apprends<br>l'allemand <span class="accent">par thèmes.</span></h1>
   <p class="home-subtitle">Cartes mémoire & quiz pour enrichir ton vocabulaire.</p>
@@ -476,12 +336,21 @@
         <div class="mode-desc">4 choix, teste tes connaissances</div>
       </div>
     </button>
+    <button class="mode-btn" onclick="selectMode('write')" id="mode-write">
+      <span class="mode-icon">✍️</span>
+      <div class="mode-info">
+        <div class="mode-title">Saisie libre</div>
+        <div class="mode-desc">Écris le mot avec son déterminant</div>
+      </div>
+    </button>
   </div>
 
   <button class="start-btn" id="start-btn" onclick="startSession()" disabled>Commencer →</button>
 </div>
 
-<!-- ══ FLASHCARDS ══ -->
+<!-- ══════════════════════════════════════ -->
+<!--  FLASHCARDS                           -->
+<!-- ══════════════════════════════════════ -->
 <div id="flash-screen" class="screen">
   <div class="session-header">
     <button class="back-btn" onclick="goHome()">← Retour</button>
@@ -511,7 +380,9 @@
   </div>
 </div>
 
-<!-- ══ QUIZ ══ -->
+<!-- ══════════════════════════════════════ -->
+<!--  QUIZ QCM                             -->
+<!-- ══════════════════════════════════════ -->
 <div id="quiz-screen" class="screen">
   <div class="session-header">
     <button class="back-btn" onclick="goHome()">← Retour</button>
@@ -535,196 +406,104 @@
   </div>
 </div>
 
-<!-- ══ RESULTS ══ -->
+<!-- ══════════════════════════════════════ -->
+<!--  QUIZ SAISIE LIBRE                    -->
+<!-- ══════════════════════════════════════ -->
+<div id="write-screen" class="screen">
+  <div class="session-header">
+    <button class="back-btn" onclick="goHome()">← Retour</button>
+    <div class="progress-text">Question <span id="write-current">1</span> / <span id="write-total">0</span></div>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="write-bar"></div></div>
+
+  <div class="write-area">
+    <!-- Question -->
+    <div class="question-card">
+      <div class="question-label">Écris le mot allemand avec son déterminant</div>
+      <div class="question-word" id="write-question-word">—</div>
+      <div class="question-hint" id="write-question-hint"></div>
+    </div>
+
+    <!-- Input -->
+    <div class="write-input-wrap">
+      <div class="write-label">Déterminants rapides ↓</div>
+      <div class="write-hint-row" id="det-hints">
+        <span class="det-hint" onclick="insertDet('der ')">der</span>
+        <span class="det-hint" onclick="insertDet('die ')">die</span>
+        <span class="det-hint" onclick="insertDet('das ')">das</span>
+        <span class="det-hint" onclick="insertDet('die ')">die (pl.)</span>
+      </div>
+      <input
+        type="text"
+        id="write-input"
+        class="write-input"
+        placeholder="ex : der Baum"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        onkeydown="handleWriteKey(event)"
+      />
+      <button class="write-submit-btn" id="write-submit-btn" onclick="submitWrite()">Vérifier →</button>
+    </div>
+
+    <!-- Feedback -->
+    <div class="feedback-row">
+      <div class="feedback-text" id="write-feedback-text">Tapez votre réponse ci-dessus…</div>
+      <button class="next-btn" id="write-next-btn" onclick="writeNext()" style="display:none">Suivant →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!--  RESULTS                              -->
+<!-- ══════════════════════════════════════ -->
 <div id="results-screen" class="screen">
   <div class="results-card">
     <span class="result-emoji" id="result-emoji">🏆</span>
+    <div class="mode-badge" id="result-mode-badge">Quiz</div>
     <h2 class="result-title" id="result-title">Ausgezeichnet!</h2>
     <p class="result-subtitle" id="result-subtitle">Quiz terminé</p>
     <div class="score-display" id="score-display">8<span>/10</span></div>
-    <div class="score-label">bonnes réponses</div>
+    <div class="score-label" id="score-label">bonnes réponses</div>
     <div class="stat-row">
       <div class="stat-box"><div class="stat-val good" id="stat-correct">8</div><div class="stat-lbl">Correctes</div></div>
-      <div class="stat-box"><div class="stat-val bad" id="stat-wrong">2</div><div class="stat-lbl">Erreurs</div></div>
-      <div class="stat-box"><div class="stat-val" id="stat-pct">80%</div><div class="stat-lbl">Score</div></div>
+      <div class="stat-box"><div class="stat-val bad"  id="stat-wrong">2</div><div class="stat-lbl">Erreurs</div></div>
+      <div class="stat-box"><div class="stat-val"      id="stat-pct">80%</div><div class="stat-lbl">Score</div></div>
     </div>
     <div class="result-actions">
-      <button class="action-btn primary" onclick="retryQuiz()">↺ Recommencer ce thème</button>
+      <button class="action-btn primary"   onclick="retryQuiz()">↺ Recommencer ce thème</button>
       <button class="action-btn secondary" onclick="goHome()">← Choisir un autre thème</button>
     </div>
   </div>
 </div>
 
-<script>
-// ═══════════════════════════════════════
-// VOCABULARY DATA
-// ═══════════════════════════════════════
-const THEMES = [
-  {
-    id: 'nature',
-    name: 'La Nature',
-    emoji: '🌿',
-    words: [
-      { fr: 'l\'arbre', de: 'der Baum', hint: 'nom masculin' },
-      { fr: 'la forêt', de: 'der Wald', hint: 'nom masculin' },
-      { fr: 'la fleur', de: 'die Blume', hint: 'nom féminin' },
-      { fr: 'la montagne', de: 'der Berg', hint: 'nom masculin' },
-      { fr: 'la rivière', de: 'der Fluss', hint: 'nom masculin' },
-      { fr: 'la mer', de: 'das Meer', hint: 'nom neutre' },
-      { fr: 'le lac', de: 'der See', hint: 'nom masculin' },
-      { fr: 'l\'herbe', de: 'das Gras', hint: 'nom neutre' },
-      { fr: 'la feuille', de: 'das Blatt', hint: 'nom neutre' },
-      { fr: 'la pierre', de: 'der Stein', hint: 'nom masculin' },
-      { fr: 'l\'oiseau', de: 'der Vogel', hint: 'nom masculin' },
-      { fr: 'le papillon', de: 'der Schmetterling', hint: 'nom masculin' },
-    ]
-  },
-  {
-    id: 'meteo',
-    name: 'La Météo',
-    emoji: '🌤',
-    words: [
-      { fr: 'le soleil', de: 'die Sonne', hint: 'nom féminin' },
-      { fr: 'la pluie', de: 'der Regen', hint: 'nom masculin' },
-      { fr: 'la neige', de: 'der Schnee', hint: 'nom masculin' },
-      { fr: 'le vent', de: 'der Wind', hint: 'nom masculin' },
-      { fr: 'le nuage', de: 'die Wolke', hint: 'nom féminin' },
-      { fr: 'l\'orage', de: 'das Gewitter', hint: 'nom neutre' },
-      { fr: 'la tempête', de: 'der Sturm', hint: 'nom masculin' },
-      { fr: 'le brouillard', de: 'der Nebel', hint: 'nom masculin' },
-      { fr: 'la chaleur', de: 'die Hitze', hint: 'nom féminin' },
-      { fr: 'le froid', de: 'die Kälte', hint: 'nom féminin' },
-      { fr: 'l\'arc-en-ciel', de: 'der Regenbogen', hint: 'nom masculin' },
-      { fr: 'la glace', de: 'das Eis', hint: 'nom neutre' },
-    ]
-  },
-  {
-    id: 'technologie',
-    name: 'Technologie',
-    emoji: '💻',
-    words: [
-      { fr: 'l\'ordinateur', de: 'der Computer', hint: 'nom masculin' },
-      { fr: 'le téléphone', de: 'das Telefon', hint: 'nom neutre' },
-      { fr: 'l\'écran', de: 'der Bildschirm', hint: 'nom masculin' },
-      { fr: 'le clavier', de: 'die Tastatur', hint: 'nom féminin' },
-      { fr: 'la souris', de: 'die Maus', hint: 'nom féminin' },
-      { fr: 'internet', de: 'das Internet', hint: 'nom neutre' },
-      { fr: 'le logiciel', de: 'die Software', hint: 'nom féminin' },
-      { fr: 'l\'application', de: 'die App', hint: 'nom féminin' },
-      { fr: 'la batterie', de: 'der Akku', hint: 'nom masculin' },
-      { fr: 'le réseau', de: 'das Netzwerk', hint: 'nom neutre' },
-      { fr: 'le câble', de: 'das Kabel', hint: 'nom neutre' },
-      { fr: 'l\'intelligence artificielle', de: 'die künstliche Intelligenz', hint: 'nom féminin' },
-    ]
-  },
-  {
-    id: 'nourriture',
-    name: 'La Nourriture',
-    emoji: '🍽',
-    words: [
-      { fr: 'le pain', de: 'das Brot', hint: 'nom neutre' },
-      { fr: 'la viande', de: 'das Fleisch', hint: 'nom neutre' },
-      { fr: 'le poisson', de: 'der Fisch', hint: 'nom masculin' },
-      { fr: 'le légume', de: 'das Gemüse', hint: 'nom neutre' },
-      { fr: 'le fruit', de: 'die Frucht', hint: 'nom féminin' },
-      { fr: 'le fromage', de: 'der Käse', hint: 'nom masculin' },
-      { fr: 'l\'œuf', de: 'das Ei', hint: 'nom neutre' },
-      { fr: 'le lait', de: 'die Milch', hint: 'nom féminin' },
-      { fr: 'l\'eau', de: 'das Wasser', hint: 'nom neutre' },
-      { fr: 'le café', de: 'der Kaffee', hint: 'nom masculin' },
-      { fr: 'le sucre', de: 'der Zucker', hint: 'nom masculin' },
-      { fr: 'le sel', de: 'das Salz', hint: 'nom neutre' },
-    ]
-  },
-  {
-    id: 'ville',
-    name: 'La Ville',
-    emoji: '🏙',
-    words: [
-      { fr: 'la rue', de: 'die Straße', hint: 'nom féminin' },
-      { fr: 'le bâtiment', de: 'das Gebäude', hint: 'nom neutre' },
-      { fr: 'le magasin', de: 'das Geschäft', hint: 'nom neutre' },
-      { fr: 'l\'hôpital', de: 'das Krankenhaus', hint: 'nom neutre' },
-      { fr: 'l\'école', de: 'die Schule', hint: 'nom féminin' },
-      { fr: 'la gare', de: 'der Bahnhof', hint: 'nom masculin' },
-      { fr: 'le pont', de: 'die Brücke', hint: 'nom féminin' },
-      { fr: 'le parc', de: 'der Park', hint: 'nom masculin' },
-      { fr: 'le musée', de: 'das Museum', hint: 'nom neutre' },
-      { fr: 'la bibliothèque', de: 'die Bibliothek', hint: 'nom féminin' },
-      { fr: 'le restaurant', de: 'das Restaurant', hint: 'nom neutre' },
-      { fr: 'l\'hôtel', de: 'das Hotel', hint: 'nom neutre' },
-    ]
-  },
-  {
-    id: 'corps',
-    name: 'Le Corps',
-    emoji: '🧍',
-    words: [
-      { fr: 'la tête', de: 'der Kopf', hint: 'nom masculin' },
-      { fr: 'les yeux', de: 'die Augen', hint: 'pluriel' },
-      { fr: 'la bouche', de: 'der Mund', hint: 'nom masculin' },
-      { fr: 'les oreilles', de: 'die Ohren', hint: 'pluriel' },
-      { fr: 'le nez', de: 'die Nase', hint: 'nom féminin' },
-      { fr: 'la main', de: 'die Hand', hint: 'nom féminin' },
-      { fr: 'le pied', de: 'der Fuß', hint: 'nom masculin' },
-      { fr: 'le cœur', de: 'das Herz', hint: 'nom neutre' },
-      { fr: 'le dos', de: 'der Rücken', hint: 'nom masculin' },
-      { fr: 'le genou', de: 'das Knie', hint: 'nom neutre' },
-      { fr: 'les cheveux', de: 'die Haare', hint: 'pluriel' },
-      { fr: 'le bras', de: 'der Arm', hint: 'nom masculin' },
-    ]
-  },
-  {
-    id: 'voyages',
-    name: 'Voyages',
-    emoji: '✈️',
-    words: [
-      { fr: 'l\'avion', de: 'das Flugzeug', hint: 'nom neutre' },
-      { fr: 'le train', de: 'der Zug', hint: 'nom masculin' },
-      { fr: 'la voiture', de: 'das Auto', hint: 'nom neutre' },
-      { fr: 'le bateau', de: 'das Schiff', hint: 'nom neutre' },
-      { fr: 'le passeport', de: 'der Reisepass', hint: 'nom masculin' },
-      { fr: 'la valise', de: 'der Koffer', hint: 'nom masculin' },
-      { fr: 'l\'aéroport', de: 'der Flughafen', hint: 'nom masculin' },
-      { fr: 'le billet', de: 'die Fahrkarte', hint: 'nom féminin' },
-      { fr: 'la carte', de: 'die Karte', hint: 'nom féminin' },
-      { fr: 'le voyage', de: 'die Reise', hint: 'nom féminin' },
-      { fr: 'l\'hôtel', de: 'das Hotel', hint: 'nom neutre' },
-      { fr: 'la frontière', de: 'die Grenze', hint: 'nom féminin' },
-    ]
-  },
-  {
-    id: 'emotions',
-    name: 'Émotions',
-    emoji: '😊',
-    words: [
-      { fr: 'la joie', de: 'die Freude', hint: 'nom féminin' },
-      { fr: 'la tristesse', de: 'die Traurigkeit', hint: 'nom féminin' },
-      { fr: 'la colère', de: 'die Wut', hint: 'nom féminin' },
-      { fr: 'la peur', de: 'die Angst', hint: 'nom féminin' },
-      { fr: 'la surprise', de: 'die Überraschung', hint: 'nom féminin' },
-      { fr: 'l\'amour', de: 'die Liebe', hint: 'nom féminin' },
-      { fr: 'la honte', de: 'die Scham', hint: 'nom féminin' },
-      { fr: 'la fierté', de: 'der Stolz', hint: 'nom masculin' },
-      { fr: 'l\'espoir', de: 'die Hoffnung', hint: 'nom féminin' },
-      { fr: 'la jalousie', de: 'die Eifersucht', hint: 'nom féminin' },
-      { fr: 'la confiance', de: 'das Vertrauen', hint: 'nom neutre' },
-      { fr: 'la curiosité', de: 'die Neugier', hint: 'nom féminin' },
-    ]
-  },
-];
+<!-- ══ DATA ══ -->
+<!-- Les thèmes et mots sont définis dans vocab-data.js -->
+<script src="vocab-data.js"></script>
 
+<script>
 // ═══════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════
 let selectedTheme = null;
-let selectedMode = 'flash';
-let sessionWords = [];
+let selectedMode  = 'flash';
+let sessionWords  = [];
+
+// flashcards
 let flashIndex = 0;
+
+// qcm
 let quizIndex = 0;
 let quizScore = 0;
 let quizWrong = 0;
-let answered = false;
+let answered  = false;
+
+// write
+let writeIndex = 0;
+let writeScore = 0;
+let writeWrong = 0;
+let writeAnswered = false;
 
 // ═══════════════════════════════════════
 // INIT
@@ -749,19 +528,22 @@ function init() {
 // SELECTION
 // ═══════════════════════════════════════
 function selectTheme(id) {
-  document.querySelectorAll('.theme-card').forEach(c => c.style.borderColor = '');
-  document.querySelectorAll('.theme-card').forEach(c => c.style.background = '');
+  document.querySelectorAll('.theme-card').forEach(c => {
+    c.style.borderColor = '';
+    c.style.background  = '';
+  });
   const card = document.getElementById('theme-' + id);
   card.style.borderColor = 'var(--gold)';
-  card.style.background = '#2a2720';
+  card.style.background  = '#2a2720';
   selectedTheme = id;
   document.getElementById('start-btn').disabled = false;
 }
 
 function selectMode(mode) {
   selectedMode = mode;
-  document.getElementById('mode-flash').classList.toggle('selected', mode === 'flash');
-  document.getElementById('mode-quiz').classList.toggle('selected', mode === 'quiz');
+  ['flash','quiz','write'].forEach(m => {
+    document.getElementById('mode-' + m).classList.toggle('selected', m === mode);
+  });
 }
 
 // ═══════════════════════════════════════
@@ -772,9 +554,7 @@ function showScreen(id) {
   document.getElementById(id).classList.add('active');
 }
 
-function goHome() {
-  showScreen('home-screen');
-}
+function goHome() { showScreen('home-screen'); }
 
 function startSession() {
   const theme = THEMES.find(t => t.id === selectedTheme);
@@ -783,11 +563,12 @@ function startSession() {
   if (selectedMode === 'flash') {
     flashIndex = 0;
     startFlash();
-  } else {
-    quizIndex = 0;
-    quizScore = 0;
-    quizWrong = 0;
+  } else if (selectedMode === 'quiz') {
+    quizIndex = 0; quizScore = 0; quizWrong = 0;
     startQuiz();
+  } else {
+    writeIndex = 0; writeScore = 0; writeWrong = 0;
+    startWrite();
   }
 }
 
@@ -803,50 +584,41 @@ function startFlash() {
 function renderFlashCard() {
   const w = sessionWords[flashIndex];
   document.getElementById('flash-current').textContent = flashIndex + 1;
-  document.getElementById('card-fr').textContent = w.fr;
-  document.getElementById('card-de').textContent = w.de;
+  document.getElementById('card-fr').textContent  = w.fr;
+  document.getElementById('card-de').textContent  = w.de;
   document.getElementById('card-hint').textContent = w.hint || '';
   document.getElementById('flashcard').classList.remove('flipped');
-  const pct = ((flashIndex) / sessionWords.length) * 100;
-  document.getElementById('flash-bar').style.width = pct + '%';
-  const isLast = flashIndex === sessionWords.length - 1;
-  document.getElementById('flash-next-btn').textContent = isLast ? 'Terminer ✓' : 'Suiv. →';
+  document.getElementById('flash-bar').style.width = (flashIndex / sessionWords.length * 100) + '%';
+  document.getElementById('flash-next-btn').textContent =
+    flashIndex === sessionWords.length - 1 ? 'Terminer ✓' : 'Suiv. →';
 }
 
-function flipCard() {
-  document.getElementById('flashcard').classList.toggle('flipped');
-}
+function flipCard()  { document.getElementById('flashcard').classList.toggle('flipped'); }
 
 function flashNext() {
-  if (flashIndex < sessionWords.length - 1) {
-    flashIndex++;
-    renderFlashCard();
-  } else {
-    showResultsFlash();
-  }
+  if (flashIndex < sessionWords.length - 1) { flashIndex++; renderFlashCard(); }
+  else showResultsFlash();
 }
 
 function flashPrev() {
-  if (flashIndex > 0) {
-    flashIndex--;
-    renderFlashCard();
-  }
+  if (flashIndex > 0) { flashIndex--; renderFlashCard(); }
 }
 
 function showResultsFlash() {
-  document.getElementById('result-emoji').textContent = '🎉';
-  document.getElementById('result-title').textContent = 'Gut gemacht!';
+  document.getElementById('result-emoji').textContent    = '🎉';
+  document.getElementById('result-title').textContent    = 'Gut gemacht!';
   document.getElementById('result-subtitle').textContent = 'Tu as parcouru toutes les cartes.';
-  document.getElementById('score-display').innerHTML = sessionWords.length + '<span> cartes</span>';
-  document.getElementById('score-label').textContent = 'consultées';
-  document.getElementById('stat-correct').textContent = sessionWords.length;
-  document.getElementById('stat-wrong').textContent = '—';
-  document.getElementById('stat-pct').textContent = '100%';
+  document.getElementById('score-display').innerHTML     = sessionWords.length + '<span> cartes</span>';
+  document.getElementById('score-label').textContent     = 'consultées';
+  document.getElementById('stat-correct').textContent    = sessionWords.length;
+  document.getElementById('stat-wrong').textContent      = '—';
+  document.getElementById('stat-pct').textContent        = '100%';
+  document.getElementById('result-mode-badge').textContent = '🃏 Cartes mémoire';
   showScreen('results-screen');
 }
 
 // ═══════════════════════════════════════
-// QUIZ
+// QUIZ QCM
 // ═══════════════════════════════════════
 function startQuiz() {
   document.getElementById('quiz-total').textContent = sessionWords.length;
@@ -861,18 +633,14 @@ function renderQuizQuestion() {
   document.getElementById('question-word').textContent = w.fr;
   document.getElementById('question-hint').textContent = '';
   document.getElementById('feedback-text').textContent = 'Choisissez une réponse…';
-  document.getElementById('feedback-text').className = 'feedback-text';
+  document.getElementById('feedback-text').className   = 'feedback-text';
   document.getElementById('quiz-next-btn').style.display = 'none';
+  document.getElementById('quiz-bar').style.width = (quizIndex / sessionWords.length * 100) + '%';
 
-  const pct = (quizIndex / sessionWords.length) * 100;
-  document.getElementById('quiz-bar').style.width = pct + '%';
-
-  // Build options: 1 correct + 3 wrong
-  const correct = w.de;
-  const others = sessionWords.filter((_, i) => i !== quizIndex).map(x => x.de);
+  const correct    = w.de;
+  const others     = sessionWords.filter((_, i) => i !== quizIndex).map(x => x.de);
   shuffle(others);
-  const distractors = others.slice(0, 3);
-  const options = shuffle([correct, ...distractors]);
+  const options = shuffle([correct, ...others.slice(0, 3)]);
 
   const grid = document.getElementById('options-grid');
   grid.innerHTML = '';
@@ -889,8 +657,7 @@ function checkAnswer(chosen, correct, btn) {
   if (answered) return;
   answered = true;
 
-  const allBtns = document.querySelectorAll('.option-btn');
-  allBtns.forEach(b => {
+  document.querySelectorAll('.option-btn').forEach(b => {
     b.disabled = true;
     if (b.textContent === correct) b.classList.add('correct');
   });
@@ -900,56 +667,167 @@ function checkAnswer(chosen, correct, btn) {
     quizScore++;
     btn.classList.add('correct');
     feedback.textContent = '✓ Richtig! Gut gemacht!';
-    feedback.className = 'feedback-text correct';
+    feedback.className   = 'feedback-text correct';
   } else {
     quizWrong++;
     btn.classList.add('wrong');
-    feedback.textContent = `✗ Faux. La bonne réponse était : ${correct}`;
-    feedback.className = 'feedback-text wrong';
+    feedback.textContent = `✗ Faux — la bonne réponse : ${correct}`;
+    feedback.className   = 'feedback-text wrong';
   }
 
-  document.getElementById('quiz-next-btn').style.display = 'block';
-  document.getElementById('quiz-next-btn').textContent =
-    quizIndex < sessionWords.length - 1 ? 'Suivant →' : 'Voir les résultats →';
+  const nb = document.getElementById('quiz-next-btn');
+  nb.style.display = 'block';
+  nb.textContent   = quizIndex < sessionWords.length - 1 ? 'Suivant →' : 'Résultats →';
 }
 
 function quizNext() {
-  if (quizIndex < sessionWords.length - 1) {
-    quizIndex++;
-    renderQuizQuestion();
-  } else {
-    showResultsQuiz();
-  }
+  if (quizIndex < sessionWords.length - 1) { quizIndex++; renderQuizQuestion(); }
+  else showResultsQuiz();
 }
 
 function showResultsQuiz() {
-  const pct = Math.round((quizScore / sessionWords.length) * 100);
+  const pct   = Math.round(quizScore / sessionWords.length * 100);
   const emoji = pct >= 90 ? '🏆' : pct >= 70 ? '🌟' : pct >= 50 ? '👍' : '💪';
   const title = pct >= 90 ? 'Ausgezeichnet!' : pct >= 70 ? 'Sehr gut!' : pct >= 50 ? 'Gut gemacht!' : 'Weiter üben!';
-  const sub = pct >= 90 ? 'Score parfait, félicitations !' : pct >= 70 ? 'Très bonne performance !' : pct >= 50 ? 'Continue comme ça !' : 'Entraîne-toi encore un peu.';
+  const sub   = pct >= 90 ? 'Score parfait, félicitations !' : pct >= 70 ? 'Très bonne performance !' : pct >= 50 ? 'Continue comme ça !' : 'Entraîne-toi encore un peu.';
 
-  document.getElementById('result-emoji').textContent = emoji;
-  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-emoji').textContent    = emoji;
+  document.getElementById('result-title').textContent    = title;
   document.getElementById('result-subtitle').textContent = sub;
-  document.getElementById('score-display').innerHTML = quizScore + '<span>/' + sessionWords.length + '</span>';
-  document.getElementById('score-label').textContent = 'bonnes réponses';
-  document.getElementById('stat-correct').textContent = quizScore;
-  document.getElementById('stat-wrong').textContent = quizWrong;
-  document.getElementById('stat-pct').textContent = pct + '%';
-
+  document.getElementById('score-display').innerHTML     = quizScore + '<span>/' + sessionWords.length + '</span>';
+  document.getElementById('score-label').textContent     = 'bonnes réponses';
+  document.getElementById('stat-correct').textContent    = quizScore;
+  document.getElementById('stat-wrong').textContent      = quizWrong;
+  document.getElementById('stat-pct').textContent        = pct + '%';
+  document.getElementById('result-mode-badge').textContent = '🎯 Quiz QCM';
   showScreen('results-screen');
 }
 
+// ═══════════════════════════════════════
+// QUIZ SAISIE LIBRE
+// ═══════════════════════════════════════
+function startWrite() {
+  document.getElementById('write-total').textContent = sessionWords.length;
+  showScreen('write-screen');
+  renderWriteQuestion();
+}
+
+function renderWriteQuestion() {
+  writeAnswered = false;
+  const w = sessionWords[writeIndex];
+
+  document.getElementById('write-current').textContent       = writeIndex + 1;
+  document.getElementById('write-question-word').textContent  = w.fr;
+  document.getElementById('write-question-hint').textContent  = w.hint || '';
+  document.getElementById('write-bar').style.width = (writeIndex / sessionWords.length * 100) + '%';
+
+  const input = document.getElementById('write-input');
+  input.value     = '';
+  input.className = 'write-input';
+  input.disabled  = false;
+  input.focus();
+
+  document.getElementById('write-feedback-text').textContent = 'Tapez votre réponse ci-dessus…';
+  document.getElementById('write-feedback-text').className   = 'feedback-text';
+  document.getElementById('write-next-btn').style.display    = 'none';
+  document.getElementById('write-submit-btn').disabled       = false;
+}
+
+// Clic rapide sur un déterminant
+function insertDet(det) {
+  const input = document.getElementById('write-input');
+  if (writeAnswered) return;
+  // Remplace si l'input commence déjà par un déterminant
+  const current = input.value;
+  const detPattern = /^(der|die|das)\s*/i;
+  input.value = det + current.replace(detPattern, '').trimStart();
+  input.focus();
+}
+
+// Valider avec Entrée
+function handleWriteKey(e) {
+  if (e.key === 'Enter') {
+    if (!writeAnswered) submitWrite();
+    else writeNext();
+  }
+}
+
+function normalize(str) {
+  return str.trim().toLowerCase()
+    .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')
+    // on laisse aussi la version native pour comparaison exacte
+}
+
+function submitWrite() {
+  if (writeAnswered) return;
+  writeAnswered = true;
+
+  const input   = document.getElementById('write-input');
+  const given   = input.value.trim();
+  const correct = sessionWords[writeIndex].de;
+
+  // Comparaison souple : ignore casse + remplace caractères spéciaux
+  const normGiven   = given.toLowerCase().replace(/\s+/g,' ');
+  const normCorrect = correct.toLowerCase().replace(/\s+/g,' ');
+  const isOk = normGiven === normCorrect
+    || normalize(given) === normalize(correct);
+
+  input.disabled = true;
+
+  const feedback = document.getElementById('write-feedback-text');
+  const nb       = document.getElementById('write-next-btn');
+
+  if (isOk) {
+    writeScore++;
+    input.className  = 'write-input correct-input';
+    feedback.textContent = '✓ Richtig! ' + correct;
+    feedback.className   = 'feedback-text correct';
+  } else {
+    writeWrong++;
+    input.className  = 'write-input wrong-input';
+    feedback.textContent = `✗ Faux — bonne réponse : ${correct}`;
+    feedback.className   = 'feedback-text wrong';
+  }
+
+  document.getElementById('write-submit-btn').disabled = true;
+  nb.style.display = 'block';
+  nb.textContent   = writeIndex < sessionWords.length - 1 ? 'Suivant →' : 'Résultats →';
+}
+
+function writeNext() {
+  if (writeIndex < sessionWords.length - 1) { writeIndex++; renderWriteQuestion(); }
+  else showResultsWrite();
+}
+
+function showResultsWrite() {
+  const pct   = Math.round(writeScore / sessionWords.length * 100);
+  const emoji = pct >= 90 ? '🏆' : pct >= 70 ? '🌟' : pct >= 50 ? '👍' : '💪';
+  const title = pct >= 90 ? 'Ausgezeichnet!' : pct >= 70 ? 'Sehr gut!' : pct >= 50 ? 'Gut gemacht!' : 'Weiter üben!';
+  const sub   = pct >= 90 ? 'Parfait, tous les déterminants maîtrisés !' : pct >= 70 ? 'Très bon niveau !' : pct >= 50 ? 'Continue comme ça !' : 'Entraîne-toi encore sur les déterminants.';
+
+  document.getElementById('result-emoji').textContent    = emoji;
+  document.getElementById('result-title').textContent    = title;
+  document.getElementById('result-subtitle').textContent = sub;
+  document.getElementById('score-display').innerHTML     = writeScore + '<span>/' + sessionWords.length + '</span>';
+  document.getElementById('score-label').textContent     = 'bonnes réponses';
+  document.getElementById('stat-correct').textContent    = writeScore;
+  document.getElementById('stat-wrong').textContent      = writeWrong;
+  document.getElementById('stat-pct').textContent        = pct + '%';
+  document.getElementById('result-mode-badge').textContent = '✍️ Saisie libre';
+  showScreen('results-screen');
+}
+
+// ═══════════════════════════════════════
+// RETRY
+// ═══════════════════════════════════════
 function retryQuiz() {
   sessionWords = shuffle([...sessionWords]);
-  quizIndex = 0;
-  quizScore = 0;
-  quizWrong = 0;
   if (selectedMode === 'flash') {
-    flashIndex = 0;
-    startFlash();
+    flashIndex = 0; startFlash();
+  } else if (selectedMode === 'quiz') {
+    quizIndex = 0; quizScore = 0; quizWrong = 0; startQuiz();
   } else {
-    startQuiz();
+    writeIndex = 0; writeScore = 0; writeWrong = 0; startWrite();
   }
 }
 
