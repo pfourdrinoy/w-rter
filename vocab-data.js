@@ -254,11 +254,7 @@ const THEMES = [
         name: 'Verbes',
         emoji: '🧑‍🎓​',
         words: [
-            {
-                id: 'verbes',
-                name: 'Verbes Principaux',
-                emoji: '🏃',
-                words: [
+
                     // --- Les Auxiliaires & Fondamentaux ---
                     { fr: 'être', de: 'sein', hint: 'L\'auxiliaire le plus important (irrégulier)' },
                     { fr: 'avoir', de: 'haben', hint: 'L\'auxiliaire de possession (proche de have)' },
@@ -323,8 +319,6 @@ const THEMES = [
                     { fr: 'chercher', de: 'suchen', hint: 'Essayer de trouver quelque chose' },
                     { fr: 'aimer', de: 'lieben', hint: 'Proche de l\'anglais "love"' },
                     { fr: 'jouer', de: 'spielen', hint: 'Pour les jeux, le sport ou la musique' }
-                ]
-            }
 
         ]
     },
