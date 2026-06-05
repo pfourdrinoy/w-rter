@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wörter — Quiz de vocabulaire allemand</title>
+<title>Wörter — Quiz de vocabulaire</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -300,6 +300,36 @@
     .options-grid { grid-template-columns: 1fr; }
     .results-card { padding: 36px 24px; }
   }
+
+  /* ── LANGUAGE SWITCHER ── */
+  .lang-switcher {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    align-items: center;
+  }
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    background: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    transition: all 0.2s;
+  }
+  .lang-btn:hover { border-color: var(--gold-dim); color: var(--cream); }
+  .lang-btn.active {
+    border-color: var(--gold);
+    background: #2a2720;
+    color: var(--gold);
+  }
+  .lang-flag { font-size: 1rem; }
 </style>
 </head>
 <body>
@@ -307,14 +337,22 @@
 <!-- ══ HEADER ══ -->
 <header>
   <div class="logo">Wörter<span>.</span></div>
-  <div class="tagline">// Quiz vocabulaire allemand</div>
+  <div class="tagline" id="header-tagline">// Quiz vocabulaire</div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" id="lang-de" onclick="switchLanguage('de')">
+      <span class="lang-flag">🇫🇷</span>→<span class="lang-flag">🇩🇪</span> Allemand
+    </button>
+    <button class="lang-btn" id="lang-es" onclick="switchLanguage('es')">
+      <span class="lang-flag">🇪🇸</span>→<span class="lang-flag">🇫🇷</span> Français
+    </button>
+  </div>
 </header>
 
 <!-- ══════════════════════════════════════ -->
 <!--  HOME                                 -->
 <!-- ══════════════════════════════════════ -->
 <div id="home-screen" class="screen active">
-  <h1 class="home-title">Apprends<br>l'allemand <span class="accent">par thèmes.</span></h1>
+  <h1 class="home-title" id="home-title">Apprends<br>l'allemand <span class="accent">par thèmes.</span></h1>
   <p class="home-subtitle">Cartes mémoire & quiz pour enrichir ton vocabulaire.</p>
 
   <div class="section-label">— Choisir un thème</div>
@@ -361,11 +399,11 @@
   <div class="flashcard-wrap">
     <div class="flashcard" id="flashcard" onclick="flipCard()">
       <div class="card-face front">
-        <div class="card-lang">Français</div>
+        <div class="card-lang" id="card-lang-front">Français</div>
         <div class="card-word" id="card-fr">—</div>
       </div>
       <div class="card-face back">
-        <div class="card-lang">Deutsch</div>
+        <div class="card-lang" id="card-lang-back">Deutsch</div>
         <div class="card-word" id="card-de">—</div>
         <div class="card-hint" id="card-hint"></div>
       </div>
@@ -392,7 +430,7 @@
 
   <div class="quiz-area">
     <div class="question-card">
-      <div class="question-label">Quel est le mot allemand pour…</div>
+      <div class="question-label" id="quiz-question-label">Quel est le mot pour…</div>
       <div class="question-word" id="question-word">—</div>
       <div class="question-hint" id="question-hint"></div>
     </div>
@@ -419,19 +457,16 @@
   <div class="write-area">
     <!-- Question -->
     <div class="question-card">
-      <div class="question-label">Écris le mot allemand avec son déterminant</div>
+      <div class="question-label" id="write-question-label">Écris le mot avec son article</div>
       <div class="question-word" id="write-question-word">—</div>
       <div class="question-hint" id="write-question-hint"></div>
     </div>
 
     <!-- Input -->
     <div class="write-input-wrap">
-      <div class="write-label">Déterminants rapides ↓</div>
+      <div class="write-label" id="write-det-label">Articles rapides ↓</div>
       <div class="write-hint-row" id="det-hints">
-        <span class="det-hint" onclick="insertDet('der ')">der</span>
-        <span class="det-hint" onclick="insertDet('die ')">die</span>
-        <span class="det-hint" onclick="insertDet('das ')">das</span>
-        <span class="det-hint" onclick="insertDet('die ')">die (pl.)</span>
+        <!-- Filled dynamically by switchLanguage() -->
       </div>
       <input
         type="text"
@@ -479,10 +514,69 @@
 </div>
 
 <!-- ══ DATA ══ -->
-<!-- Les thèmes et mots sont définis dans vocab-data.js -->
-<script src="vocab-data.js"></script>
+<!-- Les thèmes et mots sont définis dans vocab-data-de.js et vocab-data-es.js -->
+<script src="vocab-data-de.js"></script>
+<script src="vocab-data-es.js"></script>
 
 <script>
+// ═══════════════════════════════════════
+// LANGUE ACTIVE
+// ═══════════════════════════════════════
+let currentLang = 'de'; // 'de' ou 'es'
+
+// questionField = champ affiché (la question)
+// answerField   = champ à deviner (la réponse)
+const LANG_CONFIG = {
+  de: {
+    themes: () => THEMES_DE,
+    questionField: 'fr',   // on voit le mot français
+    answerField:   'de',   // on répond en allemand
+    homeTitle: "Apprends<br>l'allemand <span class=\"accent\">par thèmes.</span>",
+    cardLangQuestion: 'Français',
+    cardLangAnswer:   'Deutsch',
+    quizLabel: 'Quel est le mot allemand pour…',
+    writeLabel: 'Écris le mot allemand avec son article',
+    dets: ['der ', 'die ', 'das ', 'die '],
+    detLabels: ['der', 'die', 'das', 'die (pl.)'],
+    placeholder: 'ex : der Baum',
+    resultsTitles: {
+      flash: { title: 'Gut gemacht!', sub: 'Tu as parcouru toutes les cartes.' },
+      excellent: { t: 'Ausgezeichnet!', s: 'Score parfait, félicitations !' },
+      great:     { t: 'Sehr gut!',      s: 'Très bonne performance !' },
+      good:      { t: 'Gut gemacht!',   s: 'Continue comme ça !' },
+      keep:      { t: 'Weiter üben!',   s: 'Entraîne-toi encore un peu.' },
+    },
+    normalize: (str) => str.trim().toLowerCase()
+      .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss'),
+  },
+  es: {
+    themes: () => THEMES_ES,
+    questionField: 'es',   // on voit le mot espagnol
+    answerField:   'fr',   // on répond en français
+    homeTitle: "Apprends<br>le français <span class=\"accent\">depuis l'espagnol.</span>",
+    cardLangQuestion: 'Español',
+    cardLangAnswer:   'Français',
+    quizLabel: 'Quel est le mot français pour…',
+    writeLabel: 'Écris le mot français avec son article',
+    dets: ['le ', 'la ', 'l\'', 'les '],
+    detLabels: ['le', 'la', "l'", 'les'],
+    placeholder: "ex : la forêt",
+    resultsTitles: {
+      flash: { title: 'Bien joué !', sub: 'Tu as parcouru toutes les cartes.' },
+      excellent: { t: 'Parfait !',      s: 'Score parfait, félicitations !' },
+      great:     { t: 'Très bien !',    s: 'Très bonne performance !' },
+      good:      { t: 'Bien joué !',    s: 'Continue comme ça !' },
+      keep:      { t: 'Encore un peu !', s: 'Entraîne-toi encore un peu.' },
+    },
+    normalize: (str) => str.trim().toLowerCase()
+      .replace(/[àâä]/g,'a').replace(/[éèêë]/g,'e').replace(/[îï]/g,'i')
+      .replace(/[ôö]/g,'o').replace(/[ùûü]/g,'u').replace(/ç/g,'c'),
+  }
+};
+
+function getLang() { return LANG_CONFIG[currentLang]; }
+function getThemes() { return getLang().themes(); }
+
 // ═══════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════
@@ -490,35 +584,76 @@ let selectedTheme = null;
 let selectedMode  = 'flash';
 let sessionWords  = [];
 
-// flashcards
 let flashIndex = 0;
 
-// qcm
 let quizIndex = 0;
 let quizScore = 0;
 let quizWrong = 0;
 let answered  = false;
 
-// write
 let writeIndex = 0;
 let writeScore = 0;
 let writeWrong = 0;
 let writeAnswered = false;
 
 // ═══════════════════════════════════════
+// SWITCH LANGUE
+// ═══════════════════════════════════════
+function switchLanguage(lang) {
+  if (lang === currentLang) return;
+  currentLang = lang;
+  selectedTheme = null;
+
+  // Boutons header
+  document.getElementById('lang-de').classList.toggle('active', lang === 'de');
+  document.getElementById('lang-es').classList.toggle('active', lang === 'es');
+
+  // Textes dynamiques
+  const cfg = getLang();
+  document.getElementById('home-title').innerHTML = cfg.homeTitle;
+  document.getElementById('quiz-question-label').textContent = cfg.quizLabel;
+  document.getElementById('write-question-label').textContent = cfg.writeLabel;
+  document.getElementById('write-input').placeholder = cfg.placeholder;
+  document.getElementById('card-lang-front').textContent = cfg.cardLangQuestion;
+  document.getElementById('card-lang-back').textContent  = cfg.cardLangAnswer;
+
+  // Articles rapides
+  const detRow = document.getElementById('det-hints');
+  detRow.innerHTML = cfg.dets.map((d, i) =>
+    `<span class="det-hint" onclick="insertDet('${d}')">${cfg.detLabels[i]}</span>`
+  ).join('');
+
+  // Bouton start désactivé
+  document.getElementById('start-btn').disabled = true;
+
+  // Reconstruire la grille
+  rebuildThemesGrid();
+  goHome();
+}
+
+// ═══════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════
 function init() {
+  // Init articles par défaut (allemand)
+  switchLanguage('de');
+}
+
+function rebuildThemesGrid() {
   const grid = document.getElementById('themes-grid');
-  THEMES.forEach(t => {
+  grid.innerHTML = '';
+  const { questionField, answerField } = getLang();
+  getThemes().forEach(t => {
+    if (!t.words || !t.words[0] || !t.words[0][questionField]) return;
     const card = document.createElement('div');
     card.className = 'theme-card';
     card.id = 'theme-' + t.id;
     card.onclick = () => selectTheme(t.id);
+    const validWords = t.words.filter(w => w[questionField] && w[answerField]);
     card.innerHTML = `
       <span class="theme-emoji">${t.emoji}</span>
       <div class="theme-name">${t.name}</div>
-      <div class="theme-count">${t.words.length} mots</div>
+      <div class="theme-count">${validWords.length} mots</div>
     `;
     grid.appendChild(card);
   });
@@ -557,8 +692,9 @@ function showScreen(id) {
 function goHome() { showScreen('home-screen'); }
 
 function startSession() {
-  const theme = THEMES.find(t => t.id === selectedTheme);
-  sessionWords = shuffle([...theme.words]);
+  const { questionField, answerField } = getLang();
+  const theme = getThemes().find(t => t.id === selectedTheme);
+  sessionWords = shuffle([...theme.words.filter(w => w[questionField] && w[answerField])]);
 
   if (selectedMode === 'flash') {
     flashIndex = 0;
@@ -583,9 +719,10 @@ function startFlash() {
 
 function renderFlashCard() {
   const w = sessionWords[flashIndex];
+  const { questionField, answerField } = getLang();
   document.getElementById('flash-current').textContent = flashIndex + 1;
-  document.getElementById('card-fr').textContent  = w.fr;
-  document.getElementById('card-de').textContent  = w.de;
+  document.getElementById('card-fr').textContent  = w[questionField];
+  document.getElementById('card-de').textContent  = w[answerField];
   document.getElementById('card-hint').textContent = w.hint || '';
   document.getElementById('flashcard').classList.remove('flipped');
   document.getElementById('flash-bar').style.width = (flashIndex / sessionWords.length * 100) + '%';
@@ -605,9 +742,11 @@ function flashPrev() {
 }
 
 function showResultsFlash() {
+  const cfg = getLang();
+  const r = cfg.resultsTitles.flash;
   document.getElementById('result-emoji').textContent    = '🎉';
-  document.getElementById('result-title').textContent    = 'Gut gemacht!';
-  document.getElementById('result-subtitle').textContent = 'Tu as parcouru toutes les cartes.';
+  document.getElementById('result-title').textContent    = r.title;
+  document.getElementById('result-subtitle').textContent = r.sub;
   document.getElementById('score-display').innerHTML     = sessionWords.length + '<span> cartes</span>';
   document.getElementById('score-label').textContent     = 'consultées';
   document.getElementById('stat-correct').textContent    = sessionWords.length;
@@ -629,16 +768,17 @@ function startQuiz() {
 function renderQuizQuestion() {
   answered = false;
   const w = sessionWords[quizIndex];
+  const { questionField, answerField } = getLang();
   document.getElementById('quiz-current').textContent = quizIndex + 1;
-  document.getElementById('question-word').textContent = w.fr;
+  document.getElementById('question-word').textContent = w[questionField];
   document.getElementById('question-hint').textContent = '';
   document.getElementById('feedback-text').textContent = 'Choisissez une réponse…';
   document.getElementById('feedback-text').className   = 'feedback-text';
   document.getElementById('quiz-next-btn').style.display = 'none';
   document.getElementById('quiz-bar').style.width = (quizIndex / sessionWords.length * 100) + '%';
 
-  const correct    = w.de;
-  const others     = sessionWords.filter((_, i) => i !== quizIndex).map(x => x.de);
+  const correct    = w[answerField];
+  const others     = sessionWords.filter((_, i) => i !== quizIndex).map(x => x[answerField]);
   shuffle(others);
   const options = shuffle([correct, ...others.slice(0, 3)]);
 
@@ -666,7 +806,7 @@ function checkAnswer(chosen, correct, btn) {
   if (chosen === correct) {
     quizScore++;
     btn.classList.add('correct');
-    feedback.textContent = '✓ Richtig! Gut gemacht!';
+    feedback.textContent = '✓ Correct !';
     feedback.className   = 'feedback-text correct';
   } else {
     quizWrong++;
@@ -686,14 +826,14 @@ function quizNext() {
 }
 
 function showResultsQuiz() {
-  const pct   = Math.round(quizScore / sessionWords.length * 100);
+  const pct = Math.round(quizScore / sessionWords.length * 100);
+  const cfg = getLang().resultsTitles;
   const emoji = pct >= 90 ? '🏆' : pct >= 70 ? '🌟' : pct >= 50 ? '👍' : '💪';
-  const title = pct >= 90 ? 'Ausgezeichnet!' : pct >= 70 ? 'Sehr gut!' : pct >= 50 ? 'Gut gemacht!' : 'Weiter üben!';
-  const sub   = pct >= 90 ? 'Score parfait, félicitations !' : pct >= 70 ? 'Très bonne performance !' : pct >= 50 ? 'Continue comme ça !' : 'Entraîne-toi encore un peu.';
+  const r = pct >= 90 ? cfg.excellent : pct >= 70 ? cfg.great : pct >= 50 ? cfg.good : cfg.keep;
 
   document.getElementById('result-emoji').textContent    = emoji;
-  document.getElementById('result-title').textContent    = title;
-  document.getElementById('result-subtitle').textContent = sub;
+  document.getElementById('result-title').textContent    = r.t;
+  document.getElementById('result-subtitle').textContent = r.s;
   document.getElementById('score-display').innerHTML     = quizScore + '<span>/' + sessionWords.length + '</span>';
   document.getElementById('score-label').textContent     = 'bonnes réponses';
   document.getElementById('stat-correct').textContent    = quizScore;
@@ -715,9 +855,10 @@ function startWrite() {
 function renderWriteQuestion() {
   writeAnswered = false;
   const w = sessionWords[writeIndex];
+  const { questionField } = getLang();
 
   document.getElementById('write-current').textContent       = writeIndex + 1;
-  document.getElementById('write-question-word').textContent  = w.fr;
+  document.getElementById('write-question-word').textContent  = w[questionField];
   document.getElementById('write-question-hint').textContent  = w.hint || '';
   document.getElementById('write-bar').style.width = (writeIndex / sessionWords.length * 100) + '%';
 
@@ -733,18 +874,16 @@ function renderWriteQuestion() {
   document.getElementById('write-submit-btn').disabled       = false;
 }
 
-// Clic rapide sur un déterminant
 function insertDet(det) {
   const input = document.getElementById('write-input');
   if (writeAnswered) return;
-  // Remplace si l'input commence déjà par un déterminant
   const current = input.value;
-  const detPattern = /^(der|die|das)\s*/i;
+  // Remove any existing article at the start
+  const detPattern = /^(der|die|das|el|la|los|las)\s*/i;
   input.value = det + current.replace(detPattern, '').trimStart();
   input.focus();
 }
 
-// Valider avec Entrée
 function handleWriteKey(e) {
   if (e.key === 'Enter') {
     if (!writeAnswered) submitWrite();
@@ -753,9 +892,7 @@ function handleWriteKey(e) {
 }
 
 function normalize(str) {
-  return str.trim().toLowerCase()
-    .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')
-    // on laisse aussi la version native pour comparaison exacte
+  return getLang().normalize(str);
 }
 
 function submitWrite() {
@@ -764,9 +901,9 @@ function submitWrite() {
 
   const input   = document.getElementById('write-input');
   const given   = input.value.trim();
-  const correct = sessionWords[writeIndex].de;
+  const { answerField } = getLang();
+  const correct = sessionWords[writeIndex][answerField];
 
-  // Comparaison souple : ignore casse + remplace caractères spéciaux
   const normGiven   = given.toLowerCase().replace(/\s+/g,' ');
   const normCorrect = correct.toLowerCase().replace(/\s+/g,' ');
   const isOk = normGiven === normCorrect
@@ -780,7 +917,7 @@ function submitWrite() {
   if (isOk) {
     writeScore++;
     input.className  = 'write-input correct-input';
-    feedback.textContent = '✓ Richtig! ' + correct;
+    feedback.textContent = '✓ Correct ! ' + correct;
     feedback.className   = 'feedback-text correct';
   } else {
     writeWrong++;
@@ -800,14 +937,14 @@ function writeNext() {
 }
 
 function showResultsWrite() {
-  const pct   = Math.round(writeScore / sessionWords.length * 100);
+  const pct = Math.round(writeScore / sessionWords.length * 100);
+  const cfg = getLang().resultsTitles;
   const emoji = pct >= 90 ? '🏆' : pct >= 70 ? '🌟' : pct >= 50 ? '👍' : '💪';
-  const title = pct >= 90 ? 'Ausgezeichnet!' : pct >= 70 ? 'Sehr gut!' : pct >= 50 ? 'Gut gemacht!' : 'Weiter üben!';
-  const sub   = pct >= 90 ? 'Parfait, tous les déterminants maîtrisés !' : pct >= 70 ? 'Très bon niveau !' : pct >= 50 ? 'Continue comme ça !' : 'Entraîne-toi encore sur les déterminants.';
+  const r = pct >= 90 ? cfg.excellent : pct >= 70 ? cfg.great : pct >= 50 ? cfg.good : cfg.keep;
 
   document.getElementById('result-emoji').textContent    = emoji;
-  document.getElementById('result-title').textContent    = title;
-  document.getElementById('result-subtitle').textContent = sub;
+  document.getElementById('result-title').textContent    = r.t;
+  document.getElementById('result-subtitle').textContent = r.s;
   document.getElementById('score-display').innerHTML     = writeScore + '<span>/' + sessionWords.length + '</span>';
   document.getElementById('score-label').textContent     = 'bonnes réponses';
   document.getElementById('stat-correct').textContent    = writeScore;

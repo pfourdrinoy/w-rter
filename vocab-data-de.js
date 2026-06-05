@@ -25,7 +25,7 @@
 //      La comparaison ignore les majuscules/minuscules et les espaces.
 // ═══════════════════════════════════════════════════════════════
 
-const THEMES = [
+const THEMES_DE = [
 
     // ─────────────────────────────────────────
     //  THÈME 1 — La Nature
