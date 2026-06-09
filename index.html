@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wörter — Quiz de vocabulaire</title>
+<title>Wörter — Vokabelquiz</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -41,13 +41,11 @@
     opacity: 0.4;
   }
 
-  /* ── SCREENS ── */
   .screen { display: none; animation: fadeIn 0.4s ease; }
   .screen.active { display: flex; flex-direction: column; min-height: 100vh; }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* ── HEADER ── */
   header {
     padding: 28px 40px 20px;
     display: flex;
@@ -60,7 +58,6 @@
   .logo span { color: var(--cream); }
   .tagline { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; }
 
-  /* ── HOME ── */
   #home-screen { padding: 60px 40px 40px; max-width: 860px; margin: 0 auto; width: 100%; }
 
   .home-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; line-height: 1.05; color: var(--cream); margin-bottom: 12px; }
@@ -114,7 +111,6 @@
   .start-btn:hover { opacity: 0.88; transform: translateY(-1px); }
   .start-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
 
-  /* ── SESSION HEADER (shared) ── */
   .session-header {
     width: 100%; max-width: 600px;
     display: flex; align-items: center; justify-content: space-between;
@@ -132,7 +128,6 @@
   .progress-bar-wrap { width: 100%; max-width: 600px; height: 2px; background: var(--border); border-radius: 2px; margin-bottom: 40px; }
   .progress-bar { height: 100%; background: var(--gold); border-radius: 2px; transition: width 0.4s ease; }
 
-  /* ── FLASHCARDS ── */
   #flash-screen { align-items: center; padding: 30px 20px; }
 
   .flashcard-wrap { width: 100%; max-width: 480px; perspective: 1200px; margin-bottom: 40px; }
@@ -163,7 +158,6 @@
   .nav-btn.primary { background: var(--gold); color: var(--bg); border-color: var(--gold); }
   .nav-btn.primary:hover { opacity: 0.85; }
 
-  /* ── QUIZ QCM ── */
   #quiz-screen { align-items: center; padding: 30px 20px; }
   .quiz-area { width: 100%; max-width: 580px; }
 
@@ -183,7 +177,6 @@
   .option-btn.wrong { border-color: var(--red); background: #2b1a18; color: var(--red); }
   .option-btn:disabled { cursor: default; }
 
-  /* ── QUIZ SAISIE LIBRE ── */
   #write-screen { align-items: center; padding: 30px 20px; }
   .write-area { width: 100%; max-width: 580px; }
 
@@ -242,7 +235,6 @@
   .write-submit-btn:hover { opacity: 0.85; }
   .write-submit-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
-  /* ── FEEDBACK ROW (shared) ── */
   .feedback-row {
     display: flex; align-items: center; justify-content: space-between;
     margin-top: 24px; padding: 16px 20px;
@@ -261,7 +253,6 @@
   }
   .next-btn:hover { opacity: 0.85; }
 
-  /* ── RESULTS ── */
   #results-screen { align-items: center; justify-content: center; padding: 40px 20px; }
   .results-card { max-width: 500px; width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 56px 48px; text-align: center; }
   .result-emoji { font-size: 4rem; margin-bottom: 24px; display: block; }
@@ -283,7 +274,6 @@
   .action-btn.secondary { background: transparent; color: var(--cream); }
   .action-btn.secondary:hover { border-color: var(--gold-dim); }
 
-  /* Mode badge on results */
   .mode-badge {
     display: inline-block;
     padding: 4px 10px; border-radius: 4px;
@@ -293,7 +283,6 @@
     color: var(--muted); margin-bottom: 28px;
   }
 
-  /* ── UTILS ── */
   @media (max-width: 520px) {
     header { padding: 20px; }
     #home-screen { padding: 30px 20px; }
@@ -301,7 +290,6 @@
     .results-card { padding: 36px 24px; }
   }
 
-  /* ── LANGUAGE SWITCHER ── */
   .lang-switcher {
     display: flex;
     gap: 8px;
@@ -334,72 +322,72 @@
 </head>
 <body>
 
-<!-- ══ HEADER ══ -->
 <header>
   <div class="logo">Wörter<span>.</span></div>
-  <div class="tagline" id="header-tagline">// Quiz vocabulaire</div>
+  <div class="tagline" id="header-tagline">// Vokabeltraining</div>
   <div class="lang-switcher">
     <button class="lang-btn active" id="lang-de" onclick="switchLanguage('de')">
       <span class="lang-flag">🇫🇷</span>→<span class="lang-flag">🇩🇪</span> Allemand
     </button>
     <button class="lang-btn" id="lang-es" onclick="switchLanguage('es')">
-      <span class="lang-flag">🇪🇸</span>→<span class="lang-flag">🇫🇷</span> Français
+      <span class="lang-flag">🇪🇸</span>→<span class="lang-flag">🇫🇷</span> Französisch
     </button>
   </div>
 </header>
 
-<!-- ══════════════════════════════════════ -->
-<!--  HOME                                 -->
-<!-- ══════════════════════════════════════ -->
 <div id="home-screen" class="screen active">
-  <h1 class="home-title" id="home-title">Apprends<br>l'allemand <span class="accent">par thèmes.</span></h1>
-  <p class="home-subtitle">Cartes mémoire & quiz pour enrichir ton vocabulaire.</p>
+  <h1 class="home-title" id="home-title">Lerne<br>Deutsch <span class="accent">nach Themen.</span></h1>
+  <p class="home-subtitle">Karteikarten & Quiz zum Erweitern deines Wortschatzes.</p>
 
-  <div class="section-label">— Choisir un thème</div>
+  <div class="section-label">— Thema auswählen</div>
   <div class="themes-grid" id="themes-grid"></div>
 
-  <div class="section-label">— Mode d'apprentissage</div>
+  <div class="section-label">— Lernmodus</div>
   <div class="mode-row">
     <button class="mode-btn selected" onclick="selectMode('flash')" id="mode-flash">
       <span class="mode-icon">🃏</span>
       <div class="mode-info">
-        <div class="mode-title">Cartes mémoire</div>
-        <div class="mode-desc">Retourne les cartes pour apprendre</div>
+        <div class="mode-title">Karteikarten</div>
+        <div class="mode-desc">Karten umdrehen und lernen</div>
       </div>
     </button>
     <button class="mode-btn" onclick="selectMode('quiz')" id="mode-quiz">
       <span class="mode-icon">🎯</span>
       <div class="mode-info">
-        <div class="mode-title">Quiz QCM</div>
-        <div class="mode-desc">4 choix, teste tes connaissances</div>
+        <div class="mode-title">Multiple Choice</div>
+        <div class="mode-desc">4 Antworten, teste dein Wissen</div>
       </div>
     </button>
     <button class="mode-btn" onclick="selectMode('write')" id="mode-write">
       <span class="mode-icon">✍️</span>
       <div class="mode-info">
-        <div class="mode-title">Saisie libre</div>
-        <div class="mode-desc">Écris le mot avec son déterminant</div>
+        <div class="mode-title">Freie Eingabe</div>
+        <div class="mode-desc">Wort mit Artikel schreiben</div>
+      </div>
+    </button>
+    <button class="mode-btn" onclick="selectMode('plural')" id="mode-plural">
+      <span class="mode-icon">🔢</span>
+      <div class="mode-info">
+        <div class="mode-title">Pluralformen</div>
+        <div class="mode-desc">Pluralform des Wortes schreiben</div>
       </div>
     </button>
   </div>
 
-  <button class="start-btn" id="start-btn" onclick="startSession()" disabled>Commencer →</button>
+  <button class="start-btn" id="start-btn" onclick="startSession()" disabled>Starten →</button>
 </div>
 
-<!-- ══════════════════════════════════════ -->
-<!--  FLASHCARDS                           -->
-<!-- ══════════════════════════════════════ -->
 <div id="flash-screen" class="screen">
   <div class="session-header">
-    <button class="back-btn" onclick="goHome()">← Retour</button>
-    <div class="progress-text">Carte <span id="flash-current">1</span> / <span id="flash-total">0</span></div>
+    <button class="back-btn" onclick="goHome()">← Zurück</button>
+    <div class="progress-text">Karte <span id="flash-current">1</span> / <span id="flash-total">0</span></div>
   </div>
   <div class="progress-bar-wrap"><div class="progress-bar" id="flash-bar"></div></div>
 
   <div class="flashcard-wrap">
     <div class="flashcard" id="flashcard" onclick="flipCard()">
       <div class="card-face front">
-        <div class="card-lang" id="card-lang-front">Français</div>
+        <div class="card-lang" id="card-lang-front">Französisch</div>
         <div class="card-word" id="card-fr">—</div>
       </div>
       <div class="card-face back">
@@ -410,21 +398,18 @@
     </div>
   </div>
 
-  <div class="flip-hint">cliquer pour retourner</div>
+  <div class="flip-hint">klicken zum Umdrehen</div>
 
   <div class="flash-nav">
-    <button class="nav-btn" onclick="flashPrev()">← Préc.</button>
+    <button class="nav-btn" onclick="flashPrev()">← Vor.</button>
     <button class="nav-btn primary" onclick="flashNext()" id="flash-next-btn">Suiv. →</button>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════ -->
-<!--  QUIZ QCM                             -->
-<!-- ══════════════════════════════════════ -->
 <div id="quiz-screen" class="screen">
   <div class="session-header">
-    <button class="back-btn" onclick="goHome()">← Retour</button>
-    <div class="progress-text">Question <span id="quiz-current">1</span> / <span id="quiz-total">0</span></div>
+    <button class="back-btn" onclick="goHome()">← Zurück</button>
+    <div class="progress-text">Frage <span id="quiz-current">1</span> / <span id="quiz-total">0</span></div>
   </div>
   <div class="progress-bar-wrap"><div class="progress-bar" id="quiz-bar"></div></div>
 
@@ -439,134 +424,158 @@
 
     <div class="feedback-row">
       <div class="feedback-text" id="feedback-text">Choisissez une réponse…</div>
-      <button class="next-btn" id="quiz-next-btn" onclick="quizNext()" style="display:none">Suivant →</button>
+      <button class="next-btn" id="quiz-next-btn" onclick="quizNext()" style="display:none">Weiter →</button>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════ -->
-<!--  QUIZ SAISIE LIBRE                    -->
-<!-- ══════════════════════════════════════ -->
 <div id="write-screen" class="screen">
   <div class="session-header">
-    <button class="back-btn" onclick="goHome()">← Retour</button>
-    <div class="progress-text">Question <span id="write-current">1</span> / <span id="write-total">0</span></div>
+    <button class="back-btn" onclick="goHome()">← Zurück</button>
+    <div class="progress-text">Frage <span id="write-current">1</span> / <span id="write-total">0</span></div>
   </div>
   <div class="progress-bar-wrap"><div class="progress-bar" id="write-bar"></div></div>
 
   <div class="write-area">
-    <!-- Question -->
     <div class="question-card">
-      <div class="question-label" id="write-question-label">Écris le mot avec son article</div>
+      <div class="question-label" id="write-question-label">Schreibe das Wort mit Artikel</div>
       <div class="question-word" id="write-question-word">—</div>
       <div class="question-hint" id="write-question-hint"></div>
     </div>
 
-    <!-- Input -->
     <div class="write-input-wrap">
-      <div class="write-label" id="write-det-label">Articles rapides ↓</div>
+      <div class="write-label" id="write-det-label">Schnellartikel ↓</div>
       <div class="write-hint-row" id="det-hints">
-        <!-- Filled dynamically by switchLanguage() -->
       </div>
       <input
         type="text"
         id="write-input"
         class="write-input"
-        placeholder="ex : der Baum"
+        placeholder="z.B. : der Baum"
         autocomplete="off"
         autocorrect="off"
         autocapitalize="off"
         spellcheck="false"
         onkeydown="handleWriteKey(event)"
       />
-      <button class="write-submit-btn" id="write-submit-btn" onclick="submitWrite()">Vérifier →</button>
+      <button class="write-submit-btn" id="write-submit-btn" onclick="submitWrite()">Prüfen →</button>
     </div>
 
-    <!-- Feedback -->
     <div class="feedback-row">
-      <div class="feedback-text" id="write-feedback-text">Tapez votre réponse ci-dessus…</div>
-      <button class="next-btn" id="write-next-btn" onclick="writeNext()" style="display:none">Suivant →</button>
+      <div class="feedback-text" id="write-feedback-text">Gib deine Antwort oben ein…</div>
+      <button class="next-btn" id="write-next-btn" onclick="writeNext()" style="display:none">Weiter →</button>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════ -->
-<!--  RESULTS                              -->
-<!-- ══════════════════════════════════════ -->
+<div id="plural-screen" class="screen">
+  <div class="session-header">
+    <button class="back-btn" onclick="goHome()">← Zurück</button>
+    <div class="progress-text">Frage <span id="plural-current">1</span> / <span id="plural-total">0</span></div>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="plural-bar"></div></div>
+
+  <div class="write-area">
+    <div class="question-card">
+      <div class="question-label">Was ist der Plural von…</div>
+      <div class="question-word" id="plural-question-word">—</div>
+      <div class="question-hint" id="plural-question-hint"></div>
+    </div>
+
+    <div class="write-input-wrap">
+      <div class="write-label">Pluralartikel: die</div>
+      <div class="write-hint-row">
+        <span class="det-hint" onclick="insertPluralDet('die ')">die</span>
+      </div>
+      <input
+        type="text"
+        id="plural-input"
+        class="write-input"
+        placeholder="z.B. : die Bäume"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        onkeydown="handlePluralKey(event)"
+      />
+      <button class="write-submit-btn" id="plural-submit-btn" onclick="submitPlural()">Prüfen →</button>
+    </div>
+
+    <div class="feedback-row">
+      <div class="feedback-text" id="plural-feedback-text">Gib den Plural oben ein…</div>
+      <button class="next-btn" id="plural-next-btn" onclick="pluralNext()" style="display:none">Weiter →</button>
+    </div>
+  </div>
+</div>
+
 <div id="results-screen" class="screen">
   <div class="results-card">
     <span class="result-emoji" id="result-emoji">🏆</span>
     <div class="mode-badge" id="result-mode-badge">Quiz</div>
     <h2 class="result-title" id="result-title">Ausgezeichnet!</h2>
-    <p class="result-subtitle" id="result-subtitle">Quiz terminé</p>
+    <p class="result-subtitle" id="result-subtitle">Quiz beendet</p>
     <div class="score-display" id="score-display">8<span>/10</span></div>
-    <div class="score-label" id="score-label">bonnes réponses</div>
+    <div class="score-label" id="score-label">richtige Antworten</div>
     <div class="stat-row">
-      <div class="stat-box"><div class="stat-val good" id="stat-correct">8</div><div class="stat-lbl">Correctes</div></div>
-      <div class="stat-box"><div class="stat-val bad"  id="stat-wrong">2</div><div class="stat-lbl">Erreurs</div></div>
-      <div class="stat-box"><div class="stat-val"      id="stat-pct">80%</div><div class="stat-lbl">Score</div></div>
+      <div class="stat-box"><div class="stat-val good" id="stat-correct">8</div><div class="stat-lbl">Richtig</div></div>
+      <div class="stat-box"><div class="stat-val bad"  id="stat-wrong">2</div><div class="stat-lbl">Fehler</div></div>
+      <div class="stat-box"><div class="stat-val"      id="stat-pct">80%</div><div class="stat-lbl">Ergebnis</div></div>
     </div>
     <div class="result-actions">
-      <button class="action-btn primary"   onclick="retryQuiz()">↺ Recommencer ce thème</button>
-      <button class="action-btn secondary" onclick="goHome()">← Choisir un autre thème</button>
+      <button class="action-btn primary"   onclick="retryQuiz()">↺ Thema wiederholen</button>
+      <button class="action-btn secondary" onclick="goHome()">← Anderes Thema wählen</button>
     </div>
   </div>
 </div>
 
-<!-- ══ DATA ══ -->
-<!-- Les thèmes et mots sont définis dans vocab-data-de.js et vocab-data-es.js -->
 <script src="vocab-data-de.js"></script>
 <script src="vocab-data-es.js"></script>
 
 <script>
-// ═══════════════════════════════════════
-// LANGUE ACTIVE
-// ═══════════════════════════════════════
-let currentLang = 'de'; // 'de' ou 'es'
 
-// questionField = champ affiché (la question)
-// answerField   = champ à deviner (la réponse)
+let currentLang = 'de';
+
 const LANG_CONFIG = {
   de: {
     themes: () => THEMES_DE,
-    questionField: 'fr',   // on voit le mot français
-    answerField:   'de',   // on répond en allemand
-    homeTitle: "Apprends<br>l'allemand <span class=\"accent\">par thèmes.</span>",
-    cardLangQuestion: 'Français',
+    questionField: 'fr',
+    answerField:   'de',
+    homeTitle: "Lerne<br>Deutsch <span class=\"accent\">nach Themen.</span>",
+    cardLangQuestion: 'Französisch',
     cardLangAnswer:   'Deutsch',
-    quizLabel: 'Quel est le mot allemand pour…',
-    writeLabel: 'Écris le mot allemand avec son article',
+    quizLabel: 'Was ist das deutsche Wort für…',
+    writeLabel: 'Schreibe das deutsche Wort mit Artikel',
     dets: ['der ', 'die ', 'das ', 'die '],
     detLabels: ['der', 'die', 'das', 'die (pl.)'],
     placeholder: 'ex : der Baum',
     resultsTitles: {
-      flash: { title: 'Gut gemacht!', sub: 'Tu as parcouru toutes les cartes.' },
-      excellent: { t: 'Ausgezeichnet!', s: 'Score parfait, félicitations !' },
-      great:     { t: 'Sehr gut!',      s: 'Très bonne performance !' },
-      good:      { t: 'Gut gemacht!',   s: 'Continue comme ça !' },
-      keep:      { t: 'Weiter üben!',   s: 'Entraîne-toi encore un peu.' },
+      flash: { title: 'Gut gemacht!', sub: 'Du hast alle Karten durchgesehen.' },
+      excellent: { t: 'Ausgezeichnet!', s: 'Perfektes Ergebnis, Glückwunsch!' },
+      great:     { t: 'Sehr gut!',      s: 'Sehr gute Leistung!' },
+      good:      { t: 'Gut gemacht!',   s: 'Weiter so!' },
+      keep:      { t: 'Weiter üben!',   s: 'Übe noch ein bisschen mehr.' },
     },
     normalize: (str) => str.trim().toLowerCase()
       .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss'),
   },
   es: {
     themes: () => THEMES_ES,
-    questionField: 'es',   // on voit le mot espagnol
-    answerField:   'fr',   // on répond en français
-    homeTitle: "Apprends<br>le français <span class=\"accent\">depuis l'espagnol.</span>",
+    questionField: 'es',
+    answerField:   'fr',
+    homeTitle: "Lerne<br>Französisch <span class=\"accent\">auf Spanisch.</span>",
     cardLangQuestion: 'Español',
-    cardLangAnswer:   'Français',
-    quizLabel: 'Quel est le mot français pour…',
-    writeLabel: 'Écris le mot français avec son article',
+    cardLangAnswer:   'Französisch',
+    quizLabel: 'Was ist das französische Wort für…',
+    writeLabel: 'Schreibe das französische Wort mit Artikel',
     dets: ['le ', 'la ', 'l\'', 'les '],
     detLabels: ['le', 'la', "l'", 'les'],
     placeholder: "ex : la forêt",
     resultsTitles: {
-      flash: { title: 'Bien joué !', sub: 'Tu as parcouru toutes les cartes.' },
-      excellent: { t: 'Parfait !',      s: 'Score parfait, félicitations !' },
-      great:     { t: 'Très bien !',    s: 'Très bonne performance !' },
-      good:      { t: 'Bien joué !',    s: 'Continue comme ça !' },
-      keep:      { t: 'Encore un peu !', s: 'Entraîne-toi encore un peu.' },
+      flash: { title: 'Gut gemacht!', sub: 'Du hast alle Karten durchgesehen.' },
+      excellent: { t: 'Perfekt!',       s: 'Perfektes Ergebnis, Glückwunsch!' },
+      great:     { t: 'Sehr gut!',      s: 'Sehr gute Leistung!' },
+      good:      { t: 'Gut gemacht!',   s: 'Weiter so!' },
+      keep:      { t: 'Weiter üben!',   s: 'Übe noch ein bisschen mehr.' },
     },
     normalize: (str) => str.trim().toLowerCase()
       .replace(/[àâä]/g,'a').replace(/[éèêë]/g,'e').replace(/[îï]/g,'i')
@@ -577,9 +586,6 @@ const LANG_CONFIG = {
 function getLang() { return LANG_CONFIG[currentLang]; }
 function getThemes() { return getLang().themes(); }
 
-// ═══════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════
 let selectedTheme = null;
 let selectedMode  = 'flash';
 let sessionWords  = [];
@@ -596,19 +602,20 @@ let writeScore = 0;
 let writeWrong = 0;
 let writeAnswered = false;
 
-// ═══════════════════════════════════════
-// SWITCH LANGUE
-// ═══════════════════════════════════════
+let pluralIndex = 0;
+let pluralScore = 0;
+let pluralWrong = 0;
+let pluralAnswered = false;
+let pluralWords = [];
+
 function switchLanguage(lang) {
   if (lang === currentLang) return;
   currentLang = lang;
   selectedTheme = null;
 
-  // Boutons header
   document.getElementById('lang-de').classList.toggle('active', lang === 'de');
   document.getElementById('lang-es').classList.toggle('active', lang === 'es');
 
-  // Textes dynamiques
   const cfg = getLang();
   document.getElementById('home-title').innerHTML = cfg.homeTitle;
   document.getElementById('quiz-question-label').textContent = cfg.quizLabel;
@@ -617,25 +624,19 @@ function switchLanguage(lang) {
   document.getElementById('card-lang-front').textContent = cfg.cardLangQuestion;
   document.getElementById('card-lang-back').textContent  = cfg.cardLangAnswer;
 
-  // Articles rapides
   const detRow = document.getElementById('det-hints');
   detRow.innerHTML = cfg.dets.map((d, i) =>
     `<span class="det-hint" onclick="insertDet('${d}')">${cfg.detLabels[i]}</span>`
   ).join('');
 
-  // Bouton start désactivé
   document.getElementById('start-btn').disabled = true;
 
-  // Reconstruire la grille
   rebuildThemesGrid();
   goHome();
 }
 
-// ═══════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════
+
 function init() {
-  // Init articles par défaut (allemand)
   switchLanguage('de');
 }
 
@@ -653,15 +654,12 @@ function rebuildThemesGrid() {
     card.innerHTML = `
       <span class="theme-emoji">${t.emoji}</span>
       <div class="theme-name">${t.name}</div>
-      <div class="theme-count">${validWords.length} mots</div>
+      <div class="theme-count">${validWords.length} Wörter</div>
     `;
     grid.appendChild(card);
   });
 }
 
-// ═══════════════════════════════════════
-// SELECTION
-// ═══════════════════════════════════════
 function selectTheme(id) {
   document.querySelectorAll('.theme-card').forEach(c => {
     c.style.borderColor = '';
@@ -676,14 +674,11 @@ function selectTheme(id) {
 
 function selectMode(mode) {
   selectedMode = mode;
-  ['flash','quiz','write'].forEach(m => {
+  ['flash','quiz','write','plural'].forEach(m => {
     document.getElementById('mode-' + m).classList.toggle('selected', m === mode);
   });
 }
 
-// ═══════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -702,15 +697,15 @@ function startSession() {
   } else if (selectedMode === 'quiz') {
     quizIndex = 0; quizScore = 0; quizWrong = 0;
     startQuiz();
+  } else if (selectedMode === 'plural') {
+    pluralIndex = 0; pluralScore = 0; pluralWrong = 0;
+    startPlural();
   } else {
     writeIndex = 0; writeScore = 0; writeWrong = 0;
     startWrite();
   }
 }
 
-// ═══════════════════════════════════════
-// FLASHCARDS
-// ═══════════════════════════════════════
 function startFlash() {
   document.getElementById('flash-total').textContent = sessionWords.length;
   showScreen('flash-screen');
@@ -727,7 +722,7 @@ function renderFlashCard() {
   document.getElementById('flashcard').classList.remove('flipped');
   document.getElementById('flash-bar').style.width = (flashIndex / sessionWords.length * 100) + '%';
   document.getElementById('flash-next-btn').textContent =
-    flashIndex === sessionWords.length - 1 ? 'Terminer ✓' : 'Suiv. →';
+    flashIndex === sessionWords.length - 1 ? 'Fertig ✓' : 'Weiter →';
 }
 
 function flipCard()  { document.getElementById('flashcard').classList.toggle('flipped'); }
@@ -747,18 +742,15 @@ function showResultsFlash() {
   document.getElementById('result-emoji').textContent    = '🎉';
   document.getElementById('result-title').textContent    = r.title;
   document.getElementById('result-subtitle').textContent = r.sub;
-  document.getElementById('score-display').innerHTML     = sessionWords.length + '<span> cartes</span>';
-  document.getElementById('score-label').textContent     = 'consultées';
+  document.getElementById('score-display').innerHTML     = sessionWords.length + '<span> Karten</span>';
+  document.getElementById('score-label').textContent     = 'angesehen';
   document.getElementById('stat-correct').textContent    = sessionWords.length;
   document.getElementById('stat-wrong').textContent      = '—';
   document.getElementById('stat-pct').textContent        = '100%';
-  document.getElementById('result-mode-badge').textContent = '🃏 Cartes mémoire';
+  document.getElementById('result-mode-badge').textContent = '🃏 Karteikarten';
   showScreen('results-screen');
 }
 
-// ═══════════════════════════════════════
-// QUIZ QCM
-// ═══════════════════════════════════════
 function startQuiz() {
   document.getElementById('quiz-total').textContent = sessionWords.length;
   showScreen('quiz-screen');
@@ -772,7 +764,7 @@ function renderQuizQuestion() {
   document.getElementById('quiz-current').textContent = quizIndex + 1;
   document.getElementById('question-word').textContent = w[questionField];
   document.getElementById('question-hint').textContent = '';
-  document.getElementById('feedback-text').textContent = 'Choisissez une réponse…';
+  document.getElementById('feedback-text').textContent = 'Wähle eine Antwort…';
   document.getElementById('feedback-text').className   = 'feedback-text';
   document.getElementById('quiz-next-btn').style.display = 'none';
   document.getElementById('quiz-bar').style.width = (quizIndex / sessionWords.length * 100) + '%';
@@ -806,18 +798,18 @@ function checkAnswer(chosen, correct, btn) {
   if (chosen === correct) {
     quizScore++;
     btn.classList.add('correct');
-    feedback.textContent = '✓ Correct !';
+    feedback.textContent = '✓ Richtig!';
     feedback.className   = 'feedback-text correct';
   } else {
     quizWrong++;
     btn.classList.add('wrong');
-    feedback.textContent = `✗ Faux — la bonne réponse : ${correct}`;
+    feedback.textContent = `✗ Falsch — richtige Antwort: ${correct}`;
     feedback.className   = 'feedback-text wrong';
   }
 
   const nb = document.getElementById('quiz-next-btn');
   nb.style.display = 'block';
-  nb.textContent   = quizIndex < sessionWords.length - 1 ? 'Suivant →' : 'Résultats →';
+  nb.textContent   = quizIndex < sessionWords.length - 1 ? 'Weiter →' : 'Ergebnisse →';
 }
 
 function quizNext() {
@@ -835,17 +827,14 @@ function showResultsQuiz() {
   document.getElementById('result-title').textContent    = r.t;
   document.getElementById('result-subtitle').textContent = r.s;
   document.getElementById('score-display').innerHTML     = quizScore + '<span>/' + sessionWords.length + '</span>';
-  document.getElementById('score-label').textContent     = 'bonnes réponses';
+  document.getElementById('score-label').textContent     = 'richtige Antworten';
   document.getElementById('stat-correct').textContent    = quizScore;
   document.getElementById('stat-wrong').textContent      = quizWrong;
   document.getElementById('stat-pct').textContent        = pct + '%';
-  document.getElementById('result-mode-badge').textContent = '🎯 Quiz QCM';
+  document.getElementById('result-mode-badge').textContent = '🎯 Multiple Choice';
   showScreen('results-screen');
 }
 
-// ═══════════════════════════════════════
-// QUIZ SAISIE LIBRE
-// ═══════════════════════════════════════
 function startWrite() {
   document.getElementById('write-total').textContent = sessionWords.length;
   showScreen('write-screen');
@@ -868,7 +857,7 @@ function renderWriteQuestion() {
   input.disabled  = false;
   input.focus();
 
-  document.getElementById('write-feedback-text').textContent = 'Tapez votre réponse ci-dessus…';
+  document.getElementById('write-feedback-text').textContent = 'Gib deine Antwort oben ein…';
   document.getElementById('write-feedback-text').className   = 'feedback-text';
   document.getElementById('write-next-btn').style.display    = 'none';
   document.getElementById('write-submit-btn').disabled       = false;
@@ -917,18 +906,18 @@ function submitWrite() {
   if (isOk) {
     writeScore++;
     input.className  = 'write-input correct-input';
-    feedback.textContent = '✓ Correct ! ' + correct;
+    feedback.textContent = '✓ Richtig! ' + correct;
     feedback.className   = 'feedback-text correct';
   } else {
     writeWrong++;
     input.className  = 'write-input wrong-input';
-    feedback.textContent = `✗ Faux — bonne réponse : ${correct}`;
+    feedback.textContent = `✗ Falsch — richtige Antwort: ${correct}`;
     feedback.className   = 'feedback-text wrong';
   }
 
   document.getElementById('write-submit-btn').disabled = true;
   nb.style.display = 'block';
-  nb.textContent   = writeIndex < sessionWords.length - 1 ? 'Suivant →' : 'Résultats →';
+  nb.textContent   = writeIndex < sessionWords.length - 1 ? 'Weiter →' : 'Ergebnisse →';
 }
 
 function writeNext() {
@@ -946,31 +935,136 @@ function showResultsWrite() {
   document.getElementById('result-title').textContent    = r.t;
   document.getElementById('result-subtitle').textContent = r.s;
   document.getElementById('score-display').innerHTML     = writeScore + '<span>/' + sessionWords.length + '</span>';
-  document.getElementById('score-label').textContent     = 'bonnes réponses';
+  document.getElementById('score-label').textContent     = 'richtige Antworten';
   document.getElementById('stat-correct').textContent    = writeScore;
   document.getElementById('stat-wrong').textContent      = writeWrong;
   document.getElementById('stat-pct').textContent        = pct + '%';
-  document.getElementById('result-mode-badge').textContent = '✍️ Saisie libre';
+  document.getElementById('result-mode-badge').textContent = '✍️ Freie Eingabe';
   showScreen('results-screen');
 }
 
-// ═══════════════════════════════════════
-// RETRY
-// ═══════════════════════════════════════
+function startPlural() {
+  // Only keep words that have a plural form (pl field)
+  pluralWords = sessionWords.filter(w => w.pl && w.pl.trim() !== '');
+  if (pluralWords.length === 0) {
+    alert('Keine Pluralformen für dieses Thema verfügbar.');
+    goHome();
+    return;
+  }
+  pluralWords = shuffle([...pluralWords]);
+  document.getElementById('plural-total').textContent = pluralWords.length;
+  showScreen('plural-screen');
+  renderPluralQuestion();
+}
+
+function renderPluralQuestion() {
+  pluralAnswered = false;
+  const w = pluralWords[pluralIndex];
+
+  document.getElementById('plural-current').textContent      = pluralIndex + 1;
+  document.getElementById('plural-question-word').textContent = w.de;
+  document.getElementById('plural-question-hint').textContent = w.fr || '';
+  document.getElementById('plural-bar').style.width = (pluralIndex / pluralWords.length * 100) + '%';
+
+  const input = document.getElementById('plural-input');
+  input.value     = '';
+  input.className = 'write-input';
+  input.disabled  = false;
+  input.focus();
+
+  document.getElementById('plural-feedback-text').textContent = 'Gib den Plural oben ein…';
+  document.getElementById('plural-feedback-text').className   = 'feedback-text';
+  document.getElementById('plural-next-btn').style.display    = 'none';
+  document.getElementById('plural-submit-btn').disabled       = false;
+}
+
+function insertPluralDet(det) {
+  const input = document.getElementById('plural-input');
+  if (pluralAnswered) return;
+  const current = input.value;
+  const detPattern = /^die\s*/i;
+  input.value = det + current.replace(detPattern, '').trimStart();
+  input.focus();
+}
+
+function handlePluralKey(e) {
+  if (e.key === 'Enter') {
+    if (!pluralAnswered) submitPlural();
+    else pluralNext();
+  }
+}
+
+function submitPlural() {
+  if (pluralAnswered) return;
+  pluralAnswered = true;
+
+  const input   = document.getElementById('plural-input');
+  const given   = input.value.trim();
+  const correct = pluralWords[pluralIndex].pl;
+
+  const normGiven   = given.toLowerCase().replace(/\s+/g,' ');
+  const normCorrect = correct.toLowerCase().replace(/\s+/g,' ');
+  const isOk = normGiven === normCorrect
+    || normalize(given) === normalize(correct);
+
+  input.disabled = true;
+
+  const feedback = document.getElementById('plural-feedback-text');
+  const nb       = document.getElementById('plural-next-btn');
+
+  if (isOk) {
+    pluralScore++;
+    input.className  = 'write-input correct-input';
+    feedback.textContent = '✓ Richtig! ' + correct;
+    feedback.className   = 'feedback-text correct';
+  } else {
+    pluralWrong++;
+    input.className  = 'write-input wrong-input';
+    feedback.textContent = `✗ Falsch — richtiger Plural: ${correct}`;
+    feedback.className   = 'feedback-text wrong';
+  }
+
+  document.getElementById('plural-submit-btn').disabled = true;
+  nb.style.display = 'block';
+  nb.textContent   = pluralIndex < pluralWords.length - 1 ? 'Weiter →' : 'Ergebnisse →';
+}
+
+function pluralNext() {
+  if (pluralIndex < pluralWords.length - 1) { pluralIndex++; renderPluralQuestion(); }
+  else showResultsPlural();
+}
+
+function showResultsPlural() {
+  const pct = Math.round(pluralScore / pluralWords.length * 100);
+  const cfg = getLang().resultsTitles;
+  const emoji = pct >= 90 ? '🏆' : pct >= 70 ? '🌟' : pct >= 50 ? '👍' : '💪';
+  const r = pct >= 90 ? cfg.excellent : pct >= 70 ? cfg.great : pct >= 50 ? cfg.good : cfg.keep;
+
+  document.getElementById('result-emoji').textContent    = emoji;
+  document.getElementById('result-title').textContent    = r.t;
+  document.getElementById('result-subtitle').textContent = r.s;
+  document.getElementById('score-display').innerHTML     = pluralScore + '<span>/' + pluralWords.length + '</span>';
+  document.getElementById('score-label').textContent     = 'richtige Antworten';
+  document.getElementById('stat-correct').textContent    = pluralScore;
+  document.getElementById('stat-wrong').textContent      = pluralWrong;
+  document.getElementById('stat-pct').textContent        = pct + '%';
+  document.getElementById('result-mode-badge').textContent = '🔢 Pluralformen';
+  showScreen('results-screen');
+}
+
 function retryQuiz() {
   sessionWords = shuffle([...sessionWords]);
   if (selectedMode === 'flash') {
     flashIndex = 0; startFlash();
   } else if (selectedMode === 'quiz') {
     quizIndex = 0; quizScore = 0; quizWrong = 0; startQuiz();
+  } else if (selectedMode === 'plural') {
+    pluralIndex = 0; pluralScore = 0; pluralWrong = 0; startPlural();
   } else {
     writeIndex = 0; writeScore = 0; writeWrong = 0; startWrite();
   }
 }
 
-// ═══════════════════════════════════════
-// UTILS
-// ═══════════════════════════════════════
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));

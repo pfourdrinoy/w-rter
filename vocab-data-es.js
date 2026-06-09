@@ -1,21 +1,5 @@
-// ═══════════════════════════════════════════════════════════════
-//  WÖRTER — Vocabulaire ESPAGNOL → FRANÇAIS
-//  L'élève voit le mot espagnol et doit répondre en français.
-// ═══════════════════════════════════════════════════════════════
-//
-//  STRUCTURE D'UN MOT :
-//  {
-//    es:   'la palabra en español (con artículo)',
-//    fr:   'le mot en français (avec article)',
-//    hint: 'indication / conseil mémo'
-//  }
-// ═══════════════════════════════════════════════════════════════
-
 const THEMES_ES = [
 
-    // ─────────────────────────────────────────
-    //  THÈME 1 — La Naturaleza
-    // ─────────────────────────────────────────
     {
         id: 'naturaleza',
         name: 'La Naturaleza',
@@ -36,9 +20,6 @@ const THEMES_ES = [
         ]
     },
 
-    // ─────────────────────────────────────────
-    //  THÈME 2 — El Tiempo
-    // ─────────────────────────────────────────
     {
         id: 'tiempo',
         name: 'El Tiempo',
@@ -59,9 +40,6 @@ const THEMES_ES = [
         ]
     },
 
-    // ─────────────────────────────────────────
-    //  THÈME 3 — La Tecnología
-    // ─────────────────────────────────────────
     {
         id: 'tecnologia',
         name: 'La Tecnología',
@@ -82,9 +60,6 @@ const THEMES_ES = [
         ]
     },
 
-    // ─────────────────────────────────────────
-    //  THÈME 4 — La Comida
-    // ─────────────────────────────────────────
     {
         id: 'comida',
         name: 'La Comida',
@@ -117,9 +92,6 @@ const THEMES_ES = [
         ]
     },
 
-    // ─────────────────────────────────────────
-    //  THÈME 5 — La Ciudad
-    // ─────────────────────────────────────────
     {
         id: 'ciudad',
         name: 'La Ciudad',
@@ -140,9 +112,6 @@ const THEMES_ES = [
         ]
     },
 
-    // ─────────────────────────────────────────
-    //  THÈME 6 — El Cuerpo
-    // ─────────────────────────────────────────
     {
         id: 'cuerpo',
         name: 'El Cuerpo',
@@ -163,9 +132,6 @@ const THEMES_ES = [
         ]
     },
 
-    // ─────────────────────────────────────────
-    //  THÈME 7 — Los Viajes
-    // ─────────────────────────────────────────
     {
         id: 'viajes',
         name: 'Los Viajes',
@@ -185,9 +151,7 @@ const THEMES_ES = [
         ]
     },
 
-    // ─────────────────────────────────────────
-    //  THÈME 8 — Las Emociones
-    // ─────────────────────────────────────────
+
     {
         id: 'emociones',
         name: 'Las Emociones',
@@ -208,9 +172,6 @@ const THEMES_ES = [
         ]
     },
 
-    // ─────────────────────────────────────────
-    //  THÈME 9 — Los Verbos
-    // ─────────────────────────────────────────
     {
         id: 'verbos',
         name: 'Los Verbos',
@@ -244,9 +205,6 @@ const THEMES_ES = [
         ]
     },
 
-    // ─────────────────────────────────────────
-    //  THÈME 10 — Los Animales
-    // ─────────────────────────────────────────
     {
         id: 'animales',
         name: 'Los Animales',
@@ -276,5 +234,4 @@ const THEMES_ES = [
             { es: 'el tiburón',    fr: 'le requin',      hint: 'tiburón → requin' },
         ]
     },
-
 ];
